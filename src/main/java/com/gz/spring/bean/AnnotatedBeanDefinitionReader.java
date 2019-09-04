@@ -33,7 +33,7 @@ public class AnnotatedBeanDefinitionReader {
 		BeanDefinition beanDefinition = new BeanDefinition(annotatedClass);
 		//设置默认的beanName
 		String beanName = Introspector.decapitalize(annotatedClass.getSimpleName());
-		
+		beanDefinition.setBeanName(beanName);
 		/**
 		 * 2.通过注册器注册到BeanFactory中
 		 */

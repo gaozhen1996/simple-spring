@@ -17,6 +17,6 @@ public class Application {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.init();
 		Application app = context.getBean("application");
-		System.out.println(app);
+		System.out.println(app.testService);
 	}
 }
