@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.myspring.demo.annotation.MyAutowired;
 import com.myspring.demo.annotation.MyService;
+import com.myspring.demo.util.Console;
 
 public class AnnotationConfigApplicationContext{
 
@@ -36,7 +37,7 @@ public class AnnotationConfigApplicationContext{
 
 
 	public void init() throws Exception {
-		System.out.println("info:初始化context");
+		Console.info("初始化context");
 
 		// 1.加载配置文件
 		doLoadConfig(LOCATION);
@@ -113,25 +114,21 @@ public class AnnotationConfigApplicationContext{
 				if (clazz.isAnnotationPresent(MyService.class)) {
 					MyService s = clazz.getAnnotation(MyService.class);
 					String beanName = s.value();
-					System.out.println("info:加载Service");
+					Console.info("加载Service");
 					// 如果用户设置了Service的名字，就存用户设置的名字
 					if (!beanName.equals("")) {
 						ioc.put(beanName, clazz.newInstance());
 						continue;
 					} else {
 						ioc.put(lowerFirstStr(clazz.getSimpleName()), clazz.newInstance());
-//						// 如果自己没设置就按接口类型设置一个，多态
-//						Class<?>[] interfaces = clazz.getInterfaces();
-//						for (Class<?> cla : interfaces)
-//							ioc.put(cla.getName(), cla.newInstance());
 					}
 				} else {
-					System.out.println("info:其他类：" + name + "，忽略！");
+					Console.info("其他类：" + name + "，忽略！");
 					continue;
 				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 	}
 
@@ -172,14 +169,12 @@ public class AnnotationConfigApplicationContext{
 			in = this.getClass().getClassLoader().getResourceAsStream(configName);
 			properties.load(in);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
 				if (in != null)
 					in.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
