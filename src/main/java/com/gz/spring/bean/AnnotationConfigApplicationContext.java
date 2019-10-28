@@ -12,7 +12,7 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 	
 	private final AnnotatedBeanDefinitionReader reader;
 	
-	private final BeanFactory beanFactory;
+	private final DefaultListableBeanFactory beanFactory;
 	
 	public AnnotationConfigApplicationContext() {
 		this.beanFactory = new DefaultListableBeanFactory();
@@ -24,8 +24,6 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 		this.reader.register(annotatedClass);
 	}
 	
-
-
 	/**
 	 * 将bean注册到beanFactroy中
 	 */
@@ -34,6 +32,15 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 		this.beanFactory.registerBeanDefinition(beanName, beanDefinition);
 	}
 
+	@Override
+	public String[] getBeanDefinitionNames() {
+		return beanFactory.getBeanDefinitionNames();
+	}
 
-	
+	@Override
+	public BeanDefinition getBeanDefinition(String beanDefinitionName) {
+		return beanFactory.getBeanDefinition(beanDefinitionName);
+	}
+
+
 }

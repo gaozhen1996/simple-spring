@@ -1,4 +1,4 @@
-package com.myspring.framework.ioc;
+package com.myspring.framework;
 
 import java.io.File;
 import java.io.IOException;

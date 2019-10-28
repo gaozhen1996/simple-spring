@@ -5,7 +5,7 @@ package com.myspring.demo;
 import com.myspring.demo.annotation.MyAutowired;
 import com.myspring.demo.annotation.MyService;
 import com.myspring.demo.service.TestService;
-import com.myspring.framework.ioc.AnnotationConfigApplicationContext;
+import com.myspring.framework.AnnotationConfigApplicationContext;
 
 @MyService
 public class Application {

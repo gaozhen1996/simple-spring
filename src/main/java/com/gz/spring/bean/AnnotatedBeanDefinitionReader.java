@@ -1,5 +1,7 @@
 package com.gz.spring.bean;
 
+import com.gz.spring.context.annotation.AnnotatedBeanDefinition;
+
 import java.beans.Introspector;
 
 /**
@@ -30,7 +32,7 @@ public class AnnotatedBeanDefinitionReader {
 		/**
 		 * 1.将Class转化为BeanDefinition对象
 		 */
-		BeanDefinition beanDefinition = new BeanDefinition(annotatedClass);
+		BeanDefinition beanDefinition = new AnnotatedBeanDefinition(annotatedClass);
 		//设置默认的beanName
 		String beanName = Introspector.decapitalize(annotatedClass.getSimpleName());
 		beanDefinition.setBeanName(beanName);
