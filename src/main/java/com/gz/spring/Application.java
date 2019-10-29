@@ -10,7 +10,6 @@ public class Application {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext(Application.class);
-		ConfigurationClassPostProcessor configurationClassPostProcessor = new ConfigurationClassPostProcessor();
-		configurationClassPostProcessor.postProcessBeanDefinitionRegistry(context);
+		System.out.println(context);
 	}
 }

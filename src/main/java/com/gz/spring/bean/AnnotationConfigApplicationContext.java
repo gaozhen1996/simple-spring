@@ -1,6 +1,8 @@
 package com.gz.spring.bean;
 
 
+import com.gz.spring.context.annotation.ConfigurationClassPostProcessor;
+
 /**
  * @author gaozhen
  * @title: AnnotationConfigApplicationContext
@@ -22,6 +24,7 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClass) {
 		this();
 		this.reader.register(annotatedClass);
+		refresh();
 	}
 	
 	/**
@@ -42,5 +45,14 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 		return beanFactory.getBeanDefinition(beanDefinitionName);
 	}
 
+	public void refresh(){
+		invokeBeanFactoryPostProcessors();
+	}
+
+
+	protected void invokeBeanFactoryPostProcessors(){
+		ConfigurationClassPostProcessor configurationClassPostProcessor = new ConfigurationClassPostProcessor();
+		configurationClassPostProcessor.postProcessBeanDefinitionRegistry(this);
+	}
 
 }

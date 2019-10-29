@@ -27,9 +27,8 @@ public class AnnotationMetadata {
      * @return
      */
     public boolean isAnnotated(String annotationName){
-        for (Annotation annotation:
-             annotations) {
-            System.out.println(annotation);
+        for (Annotation annotation:annotations) {
+            System.out.println("com.gz.spring.core.type.AnnotationMetadata:"+annotation);
         }
         if(annotationName.length() > 0 && annotations.contains(annotationName)){
             return true;
