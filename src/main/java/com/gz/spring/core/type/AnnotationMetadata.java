@@ -2,7 +2,9 @@ package com.gz.spring.core.type;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -14,11 +16,12 @@ import java.util.Set;
  */
 public class AnnotationMetadata {
 
-    private Set<Annotation> annotations;
+    private Map<String,Annotation> annotations = new HashMap<String, Annotation>();
 
     public AnnotationMetadata(Class<?> introspectedClass){
-        this.annotations = null;
-        annotations = new HashSet<>(Arrays.asList(introspectedClass.getAnnotations()));
+        for (Annotation annotation : introspectedClass.getAnnotations()) {
+			annotations.put(annotation.annotationType().getName(), annotation);
+		}
     }
 
     /**
@@ -27,20 +30,15 @@ public class AnnotationMetadata {
      * @return
      */
     public boolean isAnnotated(String annotationName){
-        for (Annotation annotation:annotations) {
-            System.out.println("com.gz.spring.core.type.AnnotationMetadata:"+annotation);
-        }
-        if(annotationName.length() > 0 && annotations.contains(annotationName)){
+        if(annotationName.length() > 0 && annotations.containsKey(annotationName)){
             return true;
         }
         return false;
     }
 
     public Annotation getAnnotation(String annotationName){
-        for (Annotation annotation:annotations) {
-            if (annotation.getClass().getName().equals(annotationName)){
-                return annotation;
-            }
+        if(isAnnotated(annotationName)) {
+        	return annotations.get(annotationName);
         }
         return null;
     }

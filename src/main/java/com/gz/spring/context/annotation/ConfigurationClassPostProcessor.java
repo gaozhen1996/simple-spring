@@ -6,6 +6,7 @@ import com.gz.spring.bean.BeanDefinitionRegistry;
 import com.gz.spring.context.ComponentScan;
 import com.gz.spring.core.type.AnnotationMetadata;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -56,7 +57,8 @@ public class ConfigurationClassPostProcessor {
         //1.解析ComponentScan
         AnnotationMetadata annotationMetadata = beanDefinition.getAnnotationMetadata();
         if(annotationMetadata.isAnnotated(ComponentScan.class.getName())){
-            System.out.println(annotationMetadata.getAnnotation(ComponentScan.class.getName()));
+            ComponentScan annotation = (ComponentScan) annotationMetadata.getAnnotation(ComponentScan.class.getName());
+            System.out.println(annotation.value()[0]);
         }
 
     }
