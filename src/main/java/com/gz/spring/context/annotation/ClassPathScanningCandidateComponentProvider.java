@@ -15,8 +15,9 @@ import java.util.Set;
  */
 public class ClassPathScanningCandidateComponentProvider {
 
+
     public Set<BeanDefinition> findCandidateComponents(String basePackage) {
-        //原本的spring对basePackage做处理,我只是做了判空校验
+        //原本的spring对basePackage做过滤处理,我只是做了判空校验
         if (basePackage==null || "".equals(basePackage)){
             return  null;
         }
@@ -25,6 +26,9 @@ public class ClassPathScanningCandidateComponentProvider {
 
     private Set<BeanDefinition> scanCandidateComponents(String basePackage) {
         Set<BeanDefinition> candidates = new LinkedHashSet<>();
+
+
+
 
         return candidates;
     }

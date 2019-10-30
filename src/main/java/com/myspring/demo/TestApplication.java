@@ -8,7 +8,7 @@ import com.myspring.demo.service.TestService;
 import com.myspring.framework.AnnotationConfigApplicationContext;
 
 @MyService
-public class Application {
+public class TestApplication {
 
 	@MyAutowired("testService")
 	TestService testService;
@@ -16,7 +16,7 @@ public class Application {
 	public static void main(String[] args) throws  Exception {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.init();
-		Application app = context.getBean("application");
+		TestApplication app = context.getBean("application");
 		System.out.println(app);
 	}
 }

@@ -54,11 +54,18 @@ public class ConfigurationClassPostProcessor {
      * @param beanDefinition
      */
     public final void doProcessConfigurationClass(AnnotatedBeanDefinition beanDefinition){
+        //用于扫描包
+        ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner();
+
         //1.解析ComponentScan
         AnnotationMetadata annotationMetadata = beanDefinition.getAnnotationMetadata();
         if(annotationMetadata.isAnnotated(ComponentScan.class.getName())){
             ComponentScan annotation = (ComponentScan) annotationMetadata.getAnnotation(ComponentScan.class.getName());
-            System.out.println(annotation.value()[0]);
+            String[] packages  = annotation.value();
+            for (String needScanPackage:packages) {
+                scanner.doScan(needScanPackage);
+            }
+
         }
 
     }
