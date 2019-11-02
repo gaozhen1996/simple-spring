@@ -1,7 +1,11 @@
-﻿# simple-spring
+﻿# study-java
 <h1>目的：</h1>
-读spring源码，自己实现一个简化的spring<br>
+学习java的算法，设计模式以及类似spring，tomcat的源码<br>
 
 <h1>结构说明：</h1>
-1. com.gz.myspring.demo 是一个非常简单的IOC容器，实现了自动扫描、初始化对象、依赖注入<br>
-2. com.gz.spring，目的是仿照spring思路实现spring容器,实现一个较复杂的ioc容易
+<li>algo                主要是算法
+<li>papattern           设计模式
+<li>spring              spring源码阅读笔记
+<li>springapp           spring应用
+<li>springsimple        非常简单的spring原理
+<li>tomcat              实现简单的tomcat
