@@ -3,6 +3,7 @@ package com.gz.javastudy.spring;
 import com.gz.javastudy.spring.bean.AnnotationConfigApplicationContext;
 import com.gz.javastudy.spring.context.ComponentScan;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Enumeration;
 
@@ -16,10 +17,12 @@ public class Application {
 
 		try {
 			Enumeration<URL> resourceUrls = ClassLoader.getSystemResources("com/gz/javastudy/spring");
-			System.out.println(resourceUrls.nextElement());
 			while (resourceUrls.hasMoreElements()) {
 				URL url = resourceUrls.nextElement();
-				System.out.println("URL:"+url);
+				File dir = new File(url.getFile());
+				for (File file:dir.listFiles()) {
+					System.out.println(file);
+				}
 			}
 		}catch (Exception e){
 			e.printStackTrace();
