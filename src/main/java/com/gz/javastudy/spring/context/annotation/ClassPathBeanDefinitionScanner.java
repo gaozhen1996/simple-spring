@@ -12,7 +12,7 @@ import java.util.Set;
  * @description: TODO
  * @date 2019-10-2622:37
  */
-public class ClassPathBeanDefinitionScanner extends   ClassPathScanningCandidateComponentProvider {
+public class ClassPathBeanDefinitionScanner extends  ClassPathScanningCandidateComponentProvider {
 
     /**
      * 原本的spring方法返回值是Set<BeanDefinitionHolder>
