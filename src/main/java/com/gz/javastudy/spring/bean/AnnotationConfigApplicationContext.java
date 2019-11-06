@@ -1,7 +1,13 @@
 package com.gz.javastudy.spring.bean;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+import com.gz.javastudy.spring.bean.factory.BeanFactoryPostProcessor;
 import com.gz.javastudy.spring.context.annotation.ConfigurationClassPostProcessor;
+import com.gz.javastudy.spring.context.support.PostProcessorRegistrationDelegate;
 
 /**
  * @author gaozhen
@@ -15,6 +21,8 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 	private final AnnotatedBeanDefinitionReader reader;
 	
 	private final DefaultListableBeanFactory beanFactory;
+	
+	private final List<BeanFactoryPostProcessor> beanFactoryPostProcessors = new ArrayList<>();
 	
 	public AnnotationConfigApplicationContext() {
 		this.beanFactory = new DefaultListableBeanFactory();
@@ -39,6 +47,10 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 	public String[] getBeanDefinitionNames() {
 		return beanFactory.getBeanDefinitionNames();
 	}
+	
+	public void addBeanFactoryPostProcessor(BeanFactoryPostProcessor postProcessor) {
+		this.beanFactoryPostProcessors.add(postProcessor);
+	}
 
 	@Override
 	public BeanDefinition getBeanDefinition(String beanDefinitionName) {
@@ -53,6 +65,7 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 	protected void invokeBeanFactoryPostProcessors(){
 		ConfigurationClassPostProcessor configurationClassPostProcessor = new ConfigurationClassPostProcessor();
 		configurationClassPostProcessor.postProcessBeanDefinitionRegistry(this);
+		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, beanFactoryPostProcessors);
 	}
 
 }

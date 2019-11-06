@@ -1,16 +1,15 @@
 package com.gz.javastudy.spring.context.annotation;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gz.javastudy.spring.bean.BeanDefinition;
 import com.gz.javastudy.spring.bean.BeanDefinitionRegistry;
+import com.gz.javastudy.spring.bean.BeanFactory;
+import com.gz.javastudy.spring.bean.factory.BeanDefinitionRegistryPostProcessor;
 import com.gz.javastudy.spring.context.ComponentScan;
 import com.gz.javastudy.spring.core.type.AnnotationMetadata;
-
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author gaozhen
@@ -19,12 +18,18 @@ import java.util.Set;
  * @description: TODO
  * @date 2019-10-2710:51
  */
-public class ConfigurationClassPostProcessor {
+public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPostProcessor{
 
+	@Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
         processConfigBeanDefinitions(registry);
     }
 
+	@Override
+	public void postProcessBeanFactory(BeanFactory beanFactory) {
+		
+	}
+	
     /**
      * 解析加了Configuration注解的类
      * @param registry

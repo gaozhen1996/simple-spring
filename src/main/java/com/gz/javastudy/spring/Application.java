@@ -21,7 +21,7 @@ public class Application {
 				URL url = resourceUrls.nextElement();
 				File dir = new File(url.getFile());
 				for (File file:dir.listFiles()) {
-					System.out.println(file);
+					//System.out.println(file);
 				}
 			}
 		}catch (Exception e){

@@ -13,9 +13,11 @@ public class DefaultListableBeanFactory implements BeanFactory, BeanDefinitionRe
 
 	private final List<String> beanDefinitionNames  = new ArrayList<>(64);
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getBean(String name, Class<T> requiredType) {
-		return null;
+		BeanDefinition beanDefinition = beanDefinitionMap.get(name);
+		return (T)beanDefinition.getIntrospectedClass();
 	}
 
 	@Override
