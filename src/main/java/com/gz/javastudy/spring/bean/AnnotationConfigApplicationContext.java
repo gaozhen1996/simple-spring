@@ -63,8 +63,8 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 
 
 	protected void invokeBeanFactoryPostProcessors(){
-		ConfigurationClassPostProcessor configurationClassPostProcessor = new ConfigurationClassPostProcessor();
-		configurationClassPostProcessor.postProcessBeanDefinitionRegistry(this);
+//		ConfigurationClassPostProcessor configurationClassPostProcessor = new ConfigurationClassPostProcessor();
+//		configurationClassPostProcessor.postProcessBeanDefinitionRegistry(this);
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, beanFactoryPostProcessors);
 	}
 

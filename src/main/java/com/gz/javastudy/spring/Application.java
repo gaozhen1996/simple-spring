@@ -14,19 +14,5 @@ public class Application {
 		AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext(Application.class);
 		System.out.println(context);
-
-		try {
-			Enumeration<URL> resourceUrls = ClassLoader.getSystemResources("com/gz/javastudy/spring");
-			while (resourceUrls.hasMoreElements()) {
-				URL url = resourceUrls.nextElement();
-				File dir = new File(url.getFile());
-				for (File file:dir.listFiles()) {
-					//System.out.println(file);
-				}
-			}
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-
 	}
 }

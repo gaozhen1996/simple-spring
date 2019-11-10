@@ -1,7 +1,10 @@
 package com.gz.javastudy.spring.context.annotation;
 
 import com.gz.javastudy.spring.bean.BeanDefinition;
+import com.gz.javastudy.spring.context.Scope;
 import com.gz.javastudy.spring.core.type.AnnotationMetadata;
+
+import java.lang.annotation.Annotation;
 
 /**
  * @author gaozhen
@@ -17,6 +20,10 @@ public class AnnotatedBeanDefinition extends BeanDefinition {
     public AnnotatedBeanDefinition(Class<?> introspectedClass){
         super(introspectedClass);
         annotationMetadata = new AnnotationMetadata(introspectedClass);
+        //解析注解的值,放入bd
+        //1.Scope
+        Scope scope = (Scope) annotationMetadata.getAnnotation(Scope.class.getName());
+        this.setScope(scope==null?"singleton":scope.value());
     }
 
     public final AnnotationMetadata getAnnotationMetadata(){

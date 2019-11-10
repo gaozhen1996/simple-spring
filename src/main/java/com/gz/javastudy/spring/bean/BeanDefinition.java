@@ -13,6 +13,8 @@ public abstract class BeanDefinition {
 	
 	private String beanName;
 	
+	public final Object lock = new Object();
+
 	public BeanDefinition(Class<?> introspectedClass) {
 		this.introspectedClass = introspectedClass;
 	}

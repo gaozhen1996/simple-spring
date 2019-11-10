@@ -3,6 +3,9 @@ package com.gz.javastudy.spring.context.annotation;
 
 import com.gz.javastudy.spring.bean.BeanDefinition;
 
+import java.io.File;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -26,10 +29,18 @@ public class ClassPathScanningCandidateComponentProvider {
 
     private Set<BeanDefinition> scanCandidateComponents(String basePackage) {
         Set<BeanDefinition> candidates = new LinkedHashSet<>();
-
-
-
-
+        try{
+            Enumeration<URL> resourceUrls = ClassLoader.getSystemResources(basePackage.replaceAll("\\.","/"));
+            while (resourceUrls.hasMoreElements()) {
+                URL url = resourceUrls.nextElement();
+                File dir = new File(url.getFile());
+                for (File file:dir.listFiles()) {
+                    System.out.println(file);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return candidates;
     }
 

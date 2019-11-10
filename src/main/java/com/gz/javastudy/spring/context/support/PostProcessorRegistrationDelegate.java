@@ -28,9 +28,7 @@ public class PostProcessorRegistrationDelegate {
 			String[] bdNames = registry.getBeanDefinitionNames();
 			for (String bdName : bdNames) {
 				BeanDefinition bd =registry.getBeanDefinition(bdName);
-				//if(bd.getIntrospectedClass() == Application.class) {
-				if(bd.getIntrospectedClass() == BeanDefinitionRegistryPostProcessor.class) {
-					//System.out.println(beanFactory.getBean(bdName, Application.class));
+				if(BeanDefinitionRegistryPostProcessor.class.isAssignableFrom(bd.getIntrospectedClass())) {
 					currentRegistryProcessors.add(beanFactory.getBean(bdName, BeanDefinitionRegistryPostProcessor.class));
 				}
 			}
