@@ -4,9 +4,7 @@ package com.gz.javastudy.spring.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.gz.javastudy.spring.bean.factory.BeanFactoryPostProcessor;
-import com.gz.javastudy.spring.context.annotation.ConfigurationClassPostProcessor;
 import com.gz.javastudy.spring.context.support.PostProcessorRegistrationDelegate;
 
 /**
@@ -63,8 +61,6 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 
 
 	protected void invokeBeanFactoryPostProcessors(){
-//		ConfigurationClassPostProcessor configurationClassPostProcessor = new ConfigurationClassPostProcessor();
-//		configurationClassPostProcessor.postProcessBeanDefinitionRegistry(this);
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, beanFactoryPostProcessors);
 	}
 

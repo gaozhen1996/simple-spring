@@ -4,7 +4,6 @@ import com.gz.javastudy.spring.bean.BeanDefinition;
 import com.gz.javastudy.spring.context.Scope;
 import com.gz.javastudy.spring.core.type.AnnotationMetadata;
 
-import java.lang.annotation.Annotation;
 
 /**
  * @author gaozhen

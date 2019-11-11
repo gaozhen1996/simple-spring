@@ -27,7 +27,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 
 	@Override
 	public void postProcessBeanFactory(BeanFactory beanFactory) {
-		
+		//空实现
 	}
 	
     /**

@@ -22,5 +22,6 @@ public class TestMain {
 
         studentService = (StudentService) context.getBean("studentService");
         studentService.getStudentById();
+        context.close();
     }
 }

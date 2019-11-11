@@ -16,6 +16,7 @@ public class DefaultListableBeanFactory implements BeanFactory, BeanDefinitionRe
 	//存放beanName的list
 	private final List<String> beanDefinitionNames  = new ArrayList<>(64);
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getBean(String name, Class<T> requiredType) {
 		Object instanceObject = null;
@@ -32,8 +33,6 @@ public class DefaultListableBeanFactory implements BeanFactory, BeanDefinitionRe
 			//如果不是单例的，需要重新创建bean
 			instanceObject = createBean(beanDefinition);
 		}
-		Class<?> introspectedClass = beanDefinition.getIntrospectedClass();
-
 		return (T)instanceObject;
 	}
 

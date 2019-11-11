@@ -1,11 +1,8 @@
 package com.gz.javastudy.spring.core.type;
 
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author gaozhen
