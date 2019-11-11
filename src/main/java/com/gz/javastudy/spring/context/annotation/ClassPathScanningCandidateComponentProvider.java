@@ -54,6 +54,7 @@ public class ClassPathScanningCandidateComponentProvider {
 	    			String beanName = Introspector.decapitalize(clazz.getSimpleName());
 	    			bd.setBeanName(beanName);
 	    			if(ConfigurationClassUtils.checkConfigurationClassCandidate(bd)) {
+						System.out.println("ClassPathScanningCandidateComponentProvider："+bd.getBeanName());
 	    				candidates.add(bd);
 	    			}
 	    		}
