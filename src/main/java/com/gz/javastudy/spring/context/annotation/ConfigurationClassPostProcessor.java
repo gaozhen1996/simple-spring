@@ -10,6 +10,7 @@ import com.gz.javastudy.spring.bean.BeanFactory;
 import com.gz.javastudy.spring.bean.factory.BeanDefinitionRegistryPostProcessor;
 import com.gz.javastudy.spring.context.ComponentScan;
 import com.gz.javastudy.spring.core.type.AnnotationMetadata;
+import com.gz.javastudy.spring.core.type.filter.TypeFilter;
 
 /**
  * @author gaozhen
@@ -68,9 +69,16 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
             ComponentScan annotation = (ComponentScan) annotationMetadata.getAnnotation(ComponentScan.class.getName());
             String[] packages  = annotation.value();
             for (String needScanPackage:packages) {
+            	//添加不扫描的class
+            	scanner.addExcludeFilter(new TypeFilter() {
+					@Override
+					public boolean matchClassName(String className) {
+						return beanDefinition.getIntrospectedClass().getName().equals(className);
+					}
+				});
+            	//扫描
                 scanner.doScan(needScanPackage);
             }
-
         }
 
     }
