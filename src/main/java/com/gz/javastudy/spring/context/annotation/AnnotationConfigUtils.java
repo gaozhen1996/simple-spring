@@ -20,7 +20,8 @@ public class AnnotationConfigUtils {
         Set<BeanDefinition> beanDefs = new LinkedHashSet<>(8);
         //1.ConfigurationClassPostProcessor
         BeanDefinition def = new RootBeanDefinition(ConfigurationClassPostProcessor.class);
-        registry.registerBeanDefinition(ConfigurationClassPostProcessor.class.getName(),def);
+        def.setBeanName(ConfigurationClassPostProcessor.class.getName());
+        registry.registerBeanDefinition(def.getBeanName(),def);
         beanDefs.add(def);
         return beanDefs;
     }

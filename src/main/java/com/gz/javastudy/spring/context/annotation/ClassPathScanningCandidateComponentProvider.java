@@ -4,13 +4,14 @@ package com.gz.javastudy.spring.context.annotation;
 import java.beans.Introspector;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-
 import com.gz.javastudy.spring.bean.BeanDefinition;
+import com.gz.javastudy.spring.core.type.AnnotationMetadata;
 import com.gz.javastudy.spring.core.type.filter.TypeFilter;
 
 /**
@@ -25,6 +26,8 @@ public class ClassPathScanningCandidateComponentProvider {
 	private final List<TypeFilter> excludeFilters = new LinkedList<>();
 	
 	private Set<BeanDefinition> candidates = null;
+	
+	private final List<String> cludeAnnotations = new ArrayList<String>();
 
 	/**
 	 * 返回的BeanDefinition是加了注解的
@@ -61,7 +64,10 @@ public class ClassPathScanningCandidateComponentProvider {
     			AnnotatedBeanDefinition bd = new AnnotatedBeanDefinition(clazz);
     			String beanName = Introspector.decapitalize(clazz.getSimpleName());
     			bd.setBeanName(beanName);
-    			if(ConfigurationClassUtils.checkConfigurationClassCandidate(bd)
+    			/**
+    			 * 判断是否需要注册
+    			 */
+    			if(isCandidateComponent(bd.getAnnotationMetadata())
     					&& match(bd.getIntrospectedClass().getName())) {
     				candidates.add(bd);
     			}
@@ -73,6 +79,16 @@ public class ClassPathScanningCandidateComponentProvider {
 		this.excludeFilters.add(excludeFilter);
 	}
     
+    /**
+     * 需要注册的注解
+     * @param cludeAnnotationNames 名称
+     */
+    public void addCludeAnnotation(String...cludeAnnotationNames) {
+    	for (String annotation : cludeAnnotationNames) {
+			this.cludeAnnotations.add(annotation);
+		}
+    }
+    
     private boolean match(String className) {
     	for(TypeFilter typeFilter:excludeFilters) {
     		if(typeFilter.matchClassName(className)) {
@@ -80,5 +96,18 @@ public class ClassPathScanningCandidateComponentProvider {
     		}
     	}
     	return true;
+    }
+    
+    /**
+     * 盘算是否注册到容器中的注解
+     * @param annotationMetadata
+     * @return
+     */
+    private boolean isCandidateComponent(AnnotationMetadata annotationMetadata) {
+    	for (String cludeAnnotation : cludeAnnotations) {
+			if(annotationMetadata.isAnnotated(cludeAnnotation)) 
+				return true;
+		}
+    	return false;
     }
 }
