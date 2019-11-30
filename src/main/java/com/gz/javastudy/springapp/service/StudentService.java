@@ -1,5 +1,6 @@
-package com.gz.javastudy.springapp;
+package com.gz.javastudy.springapp.service;
 
+import com.gz.javastudy.springapp.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,14 @@ public abstract class StudentService {
 //    @Autowired
 //    public StudentDao studentDao1;
 
-    @Lookup("studentDao1")
+    /**
+     *使用这种方法，可以在一个单例的bean对象中，属性是非单例的
+     */
+    @Lookup("studentDaoImpl1")
     public abstract StudentDao getStudentDao();
 
     public void getStudentById(){
-        System.out.println("dao="+getStudentDao());
+        System.out.println("属性dao="+getStudentDao());
         System.out.println(this.hashCode());
         System.out.println(this);
         getStudentDao().getStudentById();

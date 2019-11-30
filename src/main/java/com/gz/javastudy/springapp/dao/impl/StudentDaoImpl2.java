@@ -1,6 +1,6 @@
-package com.gz.javastudy.springapp;
+package com.gz.javastudy.springapp.dao.impl;
 
-import org.springframework.context.annotation.Scope;
+import com.gz.javastudy.springapp.dao.StudentDao;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,11 +11,10 @@ import org.springframework.stereotype.Repository;
  * @date 2019-10-1915:34
  */
 @Repository
-@Scope("prototype")
-public class StudentDao1 implements StudentDao{
+public class StudentDaoImpl2 implements StudentDao {
 
     @Override
     public void getStudentById() {
-        System.out.println("student1");
+        System.out.println("student2");
     }
 }

@@ -10,5 +10,6 @@ public class Application {
 		AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext(Application.class);
 		System.out.println(context);
+		System.out.println(context.getBeanDefinition("config").isLazyInit());
 	}
 }

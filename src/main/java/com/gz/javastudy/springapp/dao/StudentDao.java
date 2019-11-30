@@ -1,4 +1,4 @@
-package com.gz.javastudy.springapp;
+package com.gz.javastudy.springapp.dao;
 
 /**
  * @author gaozhen
