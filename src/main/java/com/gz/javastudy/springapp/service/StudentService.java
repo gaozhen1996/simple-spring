@@ -1,6 +1,7 @@
 package com.gz.javastudy.springapp.service;
 
 import com.gz.javastudy.springapp.dao.StudentDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Service;
 
