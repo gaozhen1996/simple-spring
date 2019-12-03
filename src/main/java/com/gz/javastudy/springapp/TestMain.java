@@ -1,6 +1,7 @@
 package com.gz.javastudy.springapp;
 
 
+import com.gz.javastudy.springapp.imports.EnableAOP;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,20 +21,20 @@ import com.gz.javastudy.springapp.service.StudentService;
 @ComponentScan("com.gz.javastudy.springapp")
 @Configuration
 @MapperScan
+@EnableAOP
 public class TestMain {
 
     public static void main(String[] args) {
         //======================================测试单例对象中，含有非单例的属性==========================================
-        //testingletonSonjectPrototypeField();
+        testingletonSonjectPrototypeField();
         //===================================模仿mybatis，将接口注册到spring容器中======================================
-        //testSelfMyBatis(context);
+//        testSelfMyBatis();
         //===================================执行自定义的BeanFactoryPostProcessor====================================
-        testExecuteCustomBeanFactoryPostProcessor();
+//        testExecuteCustomBeanFactoryPostProcessor();
     }
 
     /**
      * 测试单例对象中，含有非单例的属性
-     * @param context
      */
     private static void testingletonSonjectPrototypeField(){
     	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestMain.class);
@@ -48,7 +49,6 @@ public class TestMain {
 
     /**
      * 模仿mybatis，将接口注册到spring容器中
-     * @param context
      */
     private static void testSelfMyBatis(){
     	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestMain.class);
