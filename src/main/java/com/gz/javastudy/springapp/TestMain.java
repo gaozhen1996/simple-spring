@@ -14,7 +14,7 @@ import com.gz.javastudy.springapp.service.StudentService;
  * @title: Test
  * @projectName simple-spring
  * @description: TODO
- * @date 2019-10-1915:37
+ * @date 2019-10-19 15:37
  */
 //@ComponentScan("com.gz.javastudy.spring")
 @ComponentScan("com.gz.javastudy.springapp")
