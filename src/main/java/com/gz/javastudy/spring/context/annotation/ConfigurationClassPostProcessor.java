@@ -88,6 +88,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
             			                  ,Service.class.getName());
             	//扫描
             	Set<BeanDefinition> scannedBeanDefinitions = scanner.doScan(needScanPackage);
+            	//Check the set of scanned definitions for any further config classes and parse recursively if needed
             	for (BeanDefinition scanBeanDefinition : scannedBeanDefinitions) {
             		if(ConfigurationClassUtils.checkConfigurationClassCandidate(scanBeanDefinition)){
             			AnnotatedBeanDefinition sacnConfigurationbd =  (AnnotatedBeanDefinition) scanBeanDefinition;
