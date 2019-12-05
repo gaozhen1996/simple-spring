@@ -1,11 +1,10 @@
 package com.gz.javastudy.springapp.common;
 
-import com.gz.javastudy.springapp.dao.StudentDao;
-import org.springframework.beans.factory.FactoryBean;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+
+import org.springframework.beans.factory.FactoryBean;
 
 /**
  * @author gaozhen
@@ -36,7 +35,10 @@ public class MyFactoryBean implements FactoryBean,InvocationHandler{
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("proxy");
+        System.out.println("proxy方法：如果调用接口studentDao的getStudentById方法，模仿执行sql");
+        if("getStudentById".equals(method.getName())) {
+        	System.out.println("select * from student id = "+args[0]);
+        }
         return null;
     }
 }

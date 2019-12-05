@@ -21,18 +21,18 @@ import com.gz.javastudy.springapp.service.StudentService;
 @ComponentScan("com.gz.javastudy.springapp")
 @Configuration
 @MapperScan
-@EnableAOP
+//@EnableAOP
 public class TestMain {
 
     public static void main(String[] args) {
         //======================================测试单例对象中，含有非单例的属性===========================================
-//        testingletonSonjectPrototypeField();
+        testingletonSonjectPrototypeField();
         //===================================模仿mybatis，将接口注册到spring容器中=======================================
 //        testSelfMyBatis();
         //===================================执行自定义的BeanFactoryPostProcessor====================================
 //        testExecuteCustomBeanFactoryPostProcessor();
         //=======================模仿AOP,测试在方法前执行自定义的代码,注意：测试这个方法需要加上@EnableAOP注解========================
-        testMyAop();
+//        testMyAop();
     }
 
     /**
@@ -56,7 +56,7 @@ public class TestMain {
     	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestMain.class);
         System.out.println("===================================模仿AOP,测试在方法前执行自定义的代码==========================================");
         StudentDao studentDao = (StudentDao) context.getBean("studentDaoImpl1");
-        studentDao.getStudentById();
+        studentDao.getStudentById(100001);
         context.close();
     }
     
@@ -78,7 +78,7 @@ public class TestMain {
     	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestMain.class);
         System.out.println("===================================模仿mybatis，将接口注册到spring容器中=======================================");
         StudentDao studentDao = (StudentDao) context.getBean("studentDao");
-        studentDao.getStudentById();
+        studentDao.getStudentById(100001);
         context.close();
     }
 

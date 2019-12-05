@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 //@Scope("prototype")
 public abstract class StudentService {
 
-//    @Autowired
-//    public StudentDao studentDao1;
+    @Autowired
+    public StudentDao studentDaoImpl2;
 
     /**
      *使用这种方法，可以在一个单例的bean对象中，属性是非单例的
@@ -26,9 +26,9 @@ public abstract class StudentService {
     public abstract StudentDao getStudentDao();
 
     public void getStudentById(){
-        System.out.println("属性dao="+getStudentDao());
-        System.out.println(this.hashCode());
+    	System.out.println("  注入单例的属性StudentDao="+studentDaoImpl2);
+        System.out.println("注入非单例的属性StudentDao="+getStudentDao());
         System.out.println(this);
-        getStudentDao().getStudentById();
+        getStudentDao().getStudentById(100001);
     }
 }

@@ -1,13 +1,12 @@
 package com.gz.javastudy.springapp.imports;
 
 
-import com.gz.javastudy.springapp.dao.StudentDao;
+import java.lang.reflect.Proxy;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
+import com.gz.javastudy.springapp.dao.StudentDao;
 
 /**
  * @author gaozhen

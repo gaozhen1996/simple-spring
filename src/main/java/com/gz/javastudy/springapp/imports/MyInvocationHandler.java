@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
  * @title: MyInvocationHandler
  * @projectName study-java
  * @description: TODO
- * @date 2019-12-0320:21
+ * @date 2019-12-03 20:21
  */
 public class MyInvocationHandler implements InvocationHandler {
 
@@ -20,7 +20,9 @@ public class MyInvocationHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("代理方法执行");
+    	if("getStudentById".equals(method.getName())) {
+    		 System.out.println("代理方法执行:模拟AOP方法");
+    	}
         return method.invoke(this.target,args);
     }
 }

@@ -8,5 +8,5 @@ package com.gz.javastudy.springapp.dao;
  * @date 2019-10-1915:32
  */
 public interface StudentDao {
-    void getStudentById();
+    void getStudentById(long id);
 }
