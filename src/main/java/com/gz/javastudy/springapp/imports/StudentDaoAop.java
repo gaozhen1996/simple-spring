@@ -19,7 +19,7 @@ public class StudentDaoAop implements BeanPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        if(beanName.equals("studentDaoImpl1")){
+        if(beanName.equals("studentDaoPrototypeImpl")){
             bean = Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{StudentDao.class}, new MyInvocationHandler(bean));
         }
         return bean;

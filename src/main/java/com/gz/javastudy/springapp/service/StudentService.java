@@ -17,16 +17,16 @@ import org.springframework.stereotype.Service;
 public abstract class StudentService {
 
     @Autowired
-    public StudentDao studentDaoImpl2;
+    public StudentDao studentDaoSingleImpl;
 
     /**
      *使用这种方法，可以在一个单例的bean对象中，属性是非单例的
      */
-    @Lookup("studentDaoImpl1")
+    @Lookup("studentDaoPrototypeImpl")
     public abstract StudentDao getStudentDao();
 
     public void getStudentById(){
-    	System.out.println("  注入单例的属性StudentDao="+studentDaoImpl2);
+    	System.out.println("  注入单例的属性StudentDao="+studentDaoSingleImpl);
         System.out.println("注入非单例的属性StudentDao="+getStudentDao());
         System.out.println(this);
         getStudentDao().getStudentById(100001);
