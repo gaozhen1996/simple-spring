@@ -81,7 +81,7 @@ public class TestMain {
     }
     
     /**
-     * 此方法的测试，详细请见https://github.com/gaozhen1996/study-note/blob/master/JavaEE/spring/spring%E6%BA%90%E7%A0%812-%E6%89%AB%E6%8F%8Fbean.md#postprocessorregistrationdelegatejava
+     * 此方法的测试，详细请见@see https://github.com/gaozhen1996/study-note/blob/master/JavaEE/spring/spring%E6%BA%90%E7%A0%812-%E6%89%AB%E6%8F%8Fbean.md#postprocessorregistrationdelegatejava
      */
     private static void testExecuteCustomBeanFactoryPostProcessor() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
