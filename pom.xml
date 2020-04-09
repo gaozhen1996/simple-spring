@@ -28,6 +28,12 @@
 			<version>4.0.0-b03</version>
 		</dependency>
 
+		<dependency>
+		  <groupId>org.mybatis</groupId>
+		  <artifactId>mybatis</artifactId>
+		  <version>3.4.6</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
