@@ -13,9 +13,10 @@ import org.springframework.beans.factory.FactoryBean;
  * @description: TODO
  * @date 2019-11-3014:29C
  */
+@SuppressWarnings("rawtypes")
 public class MyFactoryBean implements FactoryBean,InvocationHandler{
 
-    Class clazz;
+	Class clazz;
 
     public MyFactoryBean(Class clazz){
         this.clazz= clazz;
