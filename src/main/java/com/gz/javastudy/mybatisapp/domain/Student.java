@@ -1,4 +1,4 @@
-package com.gz.mybatisapp.domain;
+package com.gz.javastudy.mybatisapp.domain;
 
 public class Student {
 	private String name;

@@ -19,6 +19,6 @@
   </environments>
   
   <mappers>
-    <mapper resource="com/gz/mybatisapp/repository/StudentMapper.xml"/>
+    <mapper resource="com/gz/javastudy/mybatisapp/repository/StudentMapper.xml"/>
   </mappers>
 </configuration>
