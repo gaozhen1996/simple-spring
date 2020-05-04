@@ -2,6 +2,7 @@ package com.gz.javastudy.springapp;
 
 
 import com.gz.javastudy.springapp.imports.EnableAOP;
+import com.gz.javastudy.springapp.mybatis.MapperScan;
 
 import java.util.Scanner;
 
@@ -9,7 +10,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import com.gz.javastudy.springapp.common.MapperScan;
 import com.gz.javastudy.springapp.config.ComponentConfig;
 import com.gz.javastudy.springapp.config.ConfigurationConfig;
 import com.gz.javastudy.springapp.custom.CustomBeanFactoryPostProcessor;
@@ -27,7 +27,7 @@ import com.gz.javastudy.springapp.service.StudentService;
 @Configuration
 @MapperScan
 @EnableAOP
-public class TestStringApp {
+public class TestSpringApp {
 
     public static void main(String[] args) {
     	int flag  = 2;
@@ -59,7 +59,7 @@ public class TestStringApp {
      * 测试单例对象中，含有非单例的属性
      */
     private static void testingletonSonjectPrototypeField(){
-    	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestStringApp.class);
+    	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestSpringApp.class);
         System.out.println("======================================测试单例对象中，含有非单例的属性==========================================");
         StudentService studentService = (StudentService) context.getBean("studentService");
         studentService.getStudentById();
@@ -73,7 +73,7 @@ public class TestStringApp {
      * 模仿AOP,测试在方法前执行自定义的代码
      */
     private static void testMyAop(){
-    	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestStringApp.class);
+    	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestSpringApp.class);
         System.out.println("===================================模仿AOP,测试在方法前执行自定义的代码==========================================");
         StudentDao studentDao = (StudentDao) context.getBean("studentDaoPrototypeImpl");
         studentDao.getStudentById(100001);
@@ -86,7 +86,7 @@ public class TestStringApp {
     private static void testExecuteCustomBeanFactoryPostProcessor() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.addBeanFactoryPostProcessor(new CustomBeanFactoryPostProcessor());
-        context.register(TestStringApp.class);
+        context.register(TestSpringApp.class);
         context.refresh();
         context.close();
     }
@@ -95,7 +95,7 @@ public class TestStringApp {
      * 模仿mybatis，将接口注册到spring容器中
      */
     private static void testSelfMyBatis(){
-    	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestStringApp.class);
+    	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestSpringApp.class);
         System.out.println("===================================模仿mybatis，将接口注册到spring容器中=======================================");
         StudentDao studentDao = (StudentDao) context.getBean("studentDao");
         studentDao.getStudentById(100001);
@@ -106,7 +106,7 @@ public class TestStringApp {
      * 测试@Configuration与@Component的区别
      */
     private static void testConfigurationORComponentDiff() {
-    	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestStringApp.class);
+    	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestSpringApp.class);
         System.out.println("=================================测试@Configuration与@Component的区别=====================================");
         ConfigurationConfig configurationConfig  = (ConfigurationConfig) context.getBean("configurationConfig");
         System.out.println("使用@Configuration");

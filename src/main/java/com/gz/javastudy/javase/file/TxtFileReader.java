@@ -1,4 +1,4 @@
-package com.gz.javastudy.file;
+package com.gz.javastudy.javase.file;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

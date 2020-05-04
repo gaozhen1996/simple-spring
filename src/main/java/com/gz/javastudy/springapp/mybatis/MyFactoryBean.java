@@ -1,4 +1,4 @@
-package com.gz.javastudy.springapp.common;
+package com.gz.javastudy.springapp.mybatis;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -37,6 +37,7 @@ public class MyFactoryBean implements FactoryBean,InvocationHandler{
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("proxy方法：如果调用接口studentDao的getStudentById方法，模仿执行sql");
+        System.out.println(clazz.getName()+"."+method.getName());
         if("getStudentById".equals(method.getName())) {
         	System.out.println("select * from student id = "+args[0]);
         }

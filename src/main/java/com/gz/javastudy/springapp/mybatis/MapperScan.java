@@ -1,4 +1,4 @@
-package com.gz.javastudy.springapp.common;
+package com.gz.javastudy.springapp.mybatis;
 
 import org.springframework.context.annotation.Import;
 
