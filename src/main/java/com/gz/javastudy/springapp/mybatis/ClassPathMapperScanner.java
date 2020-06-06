@@ -19,7 +19,6 @@ public class ClassPathMapperScanner extends ClassPathBeanDefinitionScanner{
 
 	 public Set<BeanDefinition> doScan(String basePackage) {
 		 Set<BeanDefinition> beanDefinitions = findCandidateComponents(basePackage);
-//		 processBeanDefinitions(beanDefinitions);
 		 return beanDefinitions;
 	 }
 	 

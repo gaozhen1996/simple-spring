@@ -2,6 +2,8 @@ package com.gz.javastudy.springapp.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gz.javastudy.springapp.domain.Student;
+
 /**
  * @author gaozhen
  * @title: StudentDao
@@ -11,5 +13,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface StudentDao {
-    void getStudentById(long id);
+    Student getStudentById(long id);
 }

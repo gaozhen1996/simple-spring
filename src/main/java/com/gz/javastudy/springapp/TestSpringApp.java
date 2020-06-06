@@ -92,13 +92,13 @@ public class TestSpringApp {
     }
     
     /**
-     * 模仿mybatis，将接口注册到spring容器中
+     * 模仿spring-mybatis，将接口注册到spring容器中
      */
     private static void testSelfMyBatis(){
     	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestSpringApp.class);
         System.out.println("===================================模仿mybatis，将接口注册到spring容器中=======================================");
-        StudentDao studentDao = (StudentDao) context.getBean("studentDao");
-        studentDao.getStudentById(100001);
+        com.gz.javastudy.mybatisapp.repository.StudentDao studentDao = (com.gz.javastudy.mybatisapp.repository.StudentDao) context.getBean("studentDao");
+        System.out.println(studentDao.selectStudent("gz"));
         context.close();
     }
 

@@ -1,6 +1,8 @@
 package com.gz.javastudy.springapp.dao.impl;
 
 import com.gz.javastudy.springapp.dao.StudentDao;
+import com.gz.javastudy.springapp.domain.Student;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,7 +17,8 @@ import org.springframework.stereotype.Repository;
 public class StudentDaoSingleImpl implements StudentDao {
 
     @Override
-    public void getStudentById(long id) {
+    public Student getStudentById(long id) {
         System.out.println("student2");
+        return null;
     }
 }

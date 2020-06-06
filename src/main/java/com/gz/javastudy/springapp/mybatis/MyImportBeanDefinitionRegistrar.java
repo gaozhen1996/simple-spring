@@ -4,6 +4,7 @@ import java.beans.Introspector;
 import java.util.Set;
 
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
@@ -24,7 +25,7 @@ public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegi
     	//1.扫描
     	ClassPathMapperScanner scanner = new ClassPathMapperScanner(registry);
     	scanner.registerFilters();
-    	Set<BeanDefinition> bds = scanner.doScan("com.gz.javastudy.springapp.dao");
+    	Set<BeanDefinition> bds = scanner.doScan("com.gz.javastudy.mybatisapp.repository");
     	
     	//2.注册
     	for (BeanDefinition beanDefinition : bds) {
@@ -33,15 +34,10 @@ public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegi
     		String shortClassName = ClassUtils.getShortName(beanClassName);
     		shortClassName = Introspector.decapitalize(shortClassName);
     		genericBeanDefinition.getConstructorArgumentValues().addGenericArgumentValue(beanClassName);
-    		genericBeanDefinition.setBeanClass(MyFactoryBean.class);
+    		genericBeanDefinition.setBeanClass(MapperFactoryBean.class);
+    		genericBeanDefinition.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
     		registry.registerBeanDefinition(shortClassName,genericBeanDefinition);
     	}
     	
-    	
-//        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(StudentDao.class);
-//        GenericBeanDefinition beanDefinition = (GenericBeanDefinition) builder.getBeanDefinition();
-//        beanDefinition.getConstructorArgumentValues().addGenericArgumentValue("com.gz.javastudy.springapp.dao.StudentDao");
-//        beanDefinition.setBeanClass(MyFactoryBean.class);
-//        registry.registerBeanDefinition("studentDao",beanDefinition);
     }
 }
