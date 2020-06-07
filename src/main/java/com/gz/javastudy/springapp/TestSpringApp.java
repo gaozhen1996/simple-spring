@@ -2,7 +2,6 @@ package com.gz.javastudy.springapp;
 
 
 import com.gz.javastudy.springapp.imports.EnableAOP;
-import com.gz.javastudy.springapp.mybatis.CreateSQLLite;
 import com.gz.javastudy.springapp.mybatis.MapperScan;
 
 import java.util.Scanner;
