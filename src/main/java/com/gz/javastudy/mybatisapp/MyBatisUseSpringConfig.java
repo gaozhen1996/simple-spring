@@ -17,11 +17,23 @@ public class MyBatisUseSpringConfig {
 	
 	public DataSource dataSource() {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-		driverManagerDataSource.setDriverClassName("oracle.jdbc.OracleDriver");  //加载驱动
-		String url = "jdbc:oracle:thin:@localhost:1521:orcl";  //数据库路径
+		
+		/**
+		 * use oracle
+		 */
+//		driverManagerDataSource.setDriverClassName("oracle.jdbc.OracleDriver");  //加载驱动
+//		String url = "jdbc:oracle:thin:@localhost:1521:orcl";  //数据库路径
+//		driverManagerDataSource.setUrl(url);
+//		driverManagerDataSource.setUsername("FD20180816B");
+//		driverManagerDataSource.setPassword("FD20180816B");
+
+		/**
+		 * use sqlplie
+		 */
+		driverManagerDataSource.setDriverClassName("org.sqlite.JDBC");  //加载驱动
+		String url = "jdbc:sqlite:gz.db";  //数据库路径
 		driverManagerDataSource.setUrl(url);
-		driverManagerDataSource.setUsername("FD20180816B");
-		driverManagerDataSource.setPassword("FD20180816B");
+		
 		return driverManagerDataSource;
 	}
 
