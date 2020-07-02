@@ -2,6 +2,7 @@ package com.gz.javastudy.springapp.mybatis;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class CreateSQLLite {
@@ -21,12 +22,12 @@ public class CreateSQLLite {
 			//插入数据
 			statement.executeUpdate("insert into t_mybatis_student values('gz','男')");
 			// 搜索数据库，将搜索的放入数据集ResultSet中
-//			ResultSet rSet = statement.executeQuery("select * from t_mybatis_student");
-//			while (rSet.next()) { // 遍历这个数据集
-//				System.out.println("姓名：" + rSet.getString(1));
-//				System.out.println("男：" + rSet.getString(2));
-//			}
-//			rSet.close();// 关闭数据集
+			ResultSet rSet = statement.executeQuery("select * from t_mybatis_student");
+			while (rSet.next()) { // 遍历这个数据集
+				System.out.println("姓名：" + rSet.getString(1));
+				System.out.println("性别：" + rSet.getString(2));
+			}
+			rSet.close();// 关闭数据集
 			connection.close();// 关闭数据库连接
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
