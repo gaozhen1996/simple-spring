@@ -1,5 +1,7 @@
 package com.gz.javastudy.javase.reflect;
 
+import java.lang.reflect.Constructor;
+
 /**
  * 
  * @author gaozhen
@@ -33,6 +35,10 @@ public class ReflectCreateObjectThreeWay {
 		//这种方式只是加载了类，没有进行初始化
 		Class clazz4 = ClassLoader.getSystemClassLoader().loadClass("com.gz.javastudy.javase.reflect.ReflectCreateObjectThreeWay");
 		System.out.println(clazz4.newInstance());
+		
+		@SuppressWarnings("unchecked")
+		Constructor<ReflectCreateObjectThreeWay> ctor = clazz1.getDeclaredConstructor();
+		System.out.println(ctor.newInstance());
 		
 	}
 	
