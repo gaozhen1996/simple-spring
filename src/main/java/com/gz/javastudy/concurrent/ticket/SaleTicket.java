@@ -6,14 +6,15 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class SaleTicket implements Runnable{
 	static Queue<Integer> tickets = new ConcurrentLinkedQueue<>();
-	
+	static int intTickets;
 	private String saleWindows;
-	
+	boolean lockflag = false;
 	static{
 		//初始化票数据
 		for (int i=1;i<=50;i++) {
 			tickets.add(i);
 		}
+		intTickets = 50;
 	}
 	
 	public SaleTicket(String saleWindows,ArrayList<Integer> bugTickets) {
@@ -22,9 +23,16 @@ public class SaleTicket implements Runnable{
 	
 	@Override
 	public void run() {
-		while(!tickets.isEmpty()) {
-	        System.out.println(saleWindows+"售出票号："+tickets.poll());
+		if(lockflag) {
+			while(!tickets.isEmpty()) {
+		        System.out.println(saleWindows+"售出票号："+tickets.poll());
+			}
+		}else {
+			while(intTickets>0) {
+		        System.out.println(saleWindows+"售出票号："+intTickets--);
+			}
 		}
+
 	}
 
 	
