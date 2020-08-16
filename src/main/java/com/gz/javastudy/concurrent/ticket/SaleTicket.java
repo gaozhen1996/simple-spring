@@ -8,13 +8,13 @@ public class SaleTicket implements Runnable{
 	static Queue<Integer> tickets = new ConcurrentLinkedQueue<>();
 	static int intTickets;
 	private String saleWindows;
-	boolean lockflag = false;
+	boolean lockflag = true;
 	static{
 		//初始化票数据
-		for (int i=1;i<=50;i++) {
+		for (int i=1;i<=10;i++) {
 			tickets.add(i);
 		}
-		intTickets = 50;
+		intTickets = 10;
 	}
 	
 	public SaleTicket(String saleWindows,ArrayList<Integer> bugTickets) {
@@ -28,9 +28,16 @@ public class SaleTicket implements Runnable{
 		        System.out.println(saleWindows+"售出票号："+tickets.poll());
 			}
 		}else {
-			while(intTickets>0) {
-		        System.out.println(saleWindows+"售出票号："+intTickets--);
-			}
+				while(intTickets>0) {
+					synchronized(SaleTicket.class) {
+						if(intTickets>0) {
+							System.out.println(saleWindows+"售出票号："+intTickets);
+							int temp = intTickets;
+							temp = temp - 1;
+							intTickets = temp;
+						}
+					}
+				}
 		}
 
 	}
