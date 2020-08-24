@@ -11,9 +11,9 @@ import org.openjdk.jol.info.ClassLayout;
 * @date 2020年8月21日
 * @Version 1.1
  */
-public class EmptyObject {
+public class SizeEmptyObject {
 	public static void main(String[] args) {
-		EmptyObject emptyObject = new EmptyObject();
+		SizeEmptyObject emptyObject = new SizeEmptyObject();
 		System.out.println(ClassLayout.parseInstance(emptyObject).toPrintable());
 	}
 }
