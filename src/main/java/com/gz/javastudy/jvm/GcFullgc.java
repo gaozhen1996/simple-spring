@@ -9,11 +9,13 @@ import java.util.Scanner;
  * 
 * <p>
 * Description:触发服务端gc 
-* -Xms41m -Xmx41m -Xmn10m -XX:+UseParallelGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps
+* -Xms40m -Xmx40m -Xmn10m -XX:+UseParallelGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps
+* -Xms 堆最大值
+* -Xmx 堆最小值
+* -Xmn 年轻代大小
 * 堆空间 = 年轻代 + 年老代  比例：年轻代：年老代 = (1/3) : (2/3)
-* 年轻代 = Edem + from + to
-* 比例:  Edem : from : to = 8 : 1 : 1
-* 
+* 年轻代 = Eden + from + to
+* 比例:  Eden : from : to = 8 : 1 : 1 = 8M,1M,1M 
 * <p>
 * @author gaozhen
 * @date 2020年8月24日
@@ -42,7 +44,6 @@ public class GcFullgc {
         		scanner.close();
         		System.exit(0);
         	}
-//        	System.out.println(ClassLayout.parseInstance(caches).toPrintable());
 		}
 
     }
