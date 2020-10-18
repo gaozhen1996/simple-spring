@@ -4,6 +4,7 @@ package com.gz.javastudy.spring.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.gz.javastudy.spring.bean.factory.BeanFactoryPostProcessor;
 import com.gz.javastudy.spring.context.support.PostProcessorRegistrationDelegate;
 
@@ -56,7 +57,16 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 	}
 
 	public void refresh(){
-		invokeBeanFactoryPostProcessors();
+		try {
+			invokeBeanFactoryPostProcessors();
+			
+			// Instantiate all remaining (non-lazy-init) singletons.
+			finishBeanFactoryInitialization(beanFactory);	
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 	}
 
 
@@ -64,4 +74,7 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, beanFactoryPostProcessors);
 	}
 
+	protected void finishBeanFactoryInitialization(DefaultListableBeanFactory beanFactory) {
+		
+	}
 }
