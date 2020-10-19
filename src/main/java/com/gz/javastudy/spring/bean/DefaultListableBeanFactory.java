@@ -11,7 +11,7 @@ public class DefaultListableBeanFactory implements BeanFactory, BeanDefinitionRe
 	//存beanDefinition,key是beanName
 	private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
 
-	private final Map<String,Object> stringObjectMap = new ConcurrentHashMap<>(156);
+	private final Map<String,Object> stringObjectMap = new ConcurrentHashMap<>(256);
 
 	//存放beanName的list
 	private final List<String> beanDefinitionNames  = new ArrayList<>(64);
@@ -67,6 +67,12 @@ public class DefaultListableBeanFactory implements BeanFactory, BeanDefinitionRe
 			e.printStackTrace();
 		}
 		return bean;
+	}
+
+	@Override
+	public void preInstantiateSingletons() {
+		
+		
 	}
 
 }

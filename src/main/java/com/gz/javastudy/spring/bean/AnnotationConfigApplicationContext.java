@@ -57,6 +57,9 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 	}
 
 	public void refresh(){
+		/**
+		 * spring源码在该处会获取父类的beanFactory，此处模拟为了简化，直接将beanFactory在本类中实例化
+		 */
 		try {
 			invokeBeanFactoryPostProcessors();
 			
@@ -74,7 +77,7 @@ public class AnnotationConfigApplicationContext implements BeanDefinitionRegistr
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, beanFactoryPostProcessors);
 	}
 
-	protected void finishBeanFactoryInitialization(DefaultListableBeanFactory beanFactory) {
-		
+	protected void finishBeanFactoryInitialization(BeanFactory beanFactory) {
+		beanFactory.preInstantiateSingletons();
 	}
 }
