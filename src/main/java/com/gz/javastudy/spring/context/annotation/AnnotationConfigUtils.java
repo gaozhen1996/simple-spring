@@ -13,7 +13,7 @@ import java.util.Set;
  * @title: AnnotationConfigUtils
  * @projectName study-java
  * @description: TODO
- * @date 2019-11-1021:32
+ * @date 2019-11-10 21:32
  */
 public class AnnotationConfigUtils {
     public static Set<BeanDefinition> registerAnnotationConfigProcessors(BeanDefinitionRegistry registry){

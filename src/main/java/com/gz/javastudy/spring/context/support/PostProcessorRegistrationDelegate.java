@@ -28,6 +28,9 @@ public class PostProcessorRegistrationDelegate {
 			String[] bdNames = registry.getBeanDefinitionNames();
 			for (String bdName : bdNames) {
 				BeanDefinition bd =registry.getBeanDefinition(bdName);
+				/**
+				 * class1.isAssignableFrom(class2) 判定此 Class 对象所表示的类或接口与指定的 Class 参数所表示的类或接口是否相同，或是否是其超类或超接口。
+				 */
 				if(BeanDefinitionRegistryPostProcessor.class.isAssignableFrom(bd.getIntrospectedClass())) {
 					currentRegistryProcessors.add(beanFactory.getBean(bdName, BeanDefinitionRegistryPostProcessor.class));
 				}

@@ -15,6 +15,7 @@ public class AnnotatedBeanDefinitionReader {
 	
 	public AnnotatedBeanDefinitionReader(BeanDefinitionRegistry registry) {
 		this.registry = registry;
+		//注册扫描配置类的处理器
 		AnnotationConfigUtils.registerAnnotationConfigProcessors(registry);
 	}
 	
