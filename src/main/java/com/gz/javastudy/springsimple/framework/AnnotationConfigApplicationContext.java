@@ -1,31 +1,37 @@
 package com.gz.javastudy.springsimple.framework;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.gz.javastudy.springsimple.demo.annotation.MyAutowired;
-import com.gz.javastudy.springsimple.demo.annotation.MyService;
-import com.gz.javastudy.springsimple.demo.util.Console;
+import com.gz.javastudy.springsimple.framework.util.Console;
 
 public class AnnotationConfigApplicationContext{
+	
+	public AnnotationConfigApplicationContext() {
+		super();
+	}
+	
+	public AnnotationConfigApplicationContext(Class<?> configClass) {
+		//1.扫描类
+		MyComponentScan componentScan = (MyComponentScan) configClass.getAnnotation(MyComponentScan.class);
+		String scanPath = componentScan.value();
+		this.doScanner(scanPath);
+		refresh();
+	}
+	
+	public void refresh() {
+		// 初始化所有实例并放入ioc容器中
+		doInstance();
 
-
-	/**
-	 * 与web.xml中param-name一致
-	 */
-	private static final String LOCATION = "application.properties";
-
-	// 配置信息
-	private Properties properties = new Properties();
+		// 注入依赖（DI）
+		doAutowired();
+	}
 
 	// 用于存放所有加载了的类的name
 	private List<String> className = new ArrayList<String>();
@@ -35,23 +41,6 @@ public class AnnotationConfigApplicationContext{
 	 */
 	private Map<String, Object> ioc = new ConcurrentHashMap<String, Object>();
 
-
-	public void init() throws Exception {
-		Console.info("初始化context");
-
-		// 1.加载配置文件
-		doLoadConfig(LOCATION);
-
-		// 2.扫描文件，并将文件名放入className中
-		doScanner(properties.getProperty("scanPackage"));
-
-		// 3.初始化所有实例并放入ioc容器中
-		doInstance();
-
-		// 4.注入依赖（DI）
-		doAutowired();
-
-	}
 
 	@SuppressWarnings("unchecked")
 	public <T> T getBean(String beanName) {
@@ -145,6 +134,9 @@ public class AnnotationConfigApplicationContext{
 	 */
 	private void doScanner(String packageName) {
 		URL url = AnnotationConfigApplicationContext.class.getResource("/" + packageName.replaceAll("\\.", "/"));
+		
+		System.out.println(url);
+		
 		File dir = new File(url.getFile());
 		for (File f : dir.listFiles()) {
 			if (f.isDirectory()) {
@@ -153,29 +145,6 @@ public class AnnotationConfigApplicationContext{
 			} else {
 				// 将包名等信息整理后放入className的list中
 				className.add(packageName + "." + f.getName().replaceAll(".class", "").trim());
-			}
-		}
-	}
-
-	/**
-	 * 1.加载配置文件
-	 * 
-	 * @param configName
-	 *            参数name
-	 */
-	private void doLoadConfig(String configName) {
-		InputStream in = null;
-		try {
-			in = this.getClass().getClassLoader().getResourceAsStream(configName);
-			properties.load(in);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (in != null)
-					in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 	}

@@ -2,10 +2,11 @@ package com.gz.javastudy.springsimple.demo.service;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.stereotype.Service;
+import com.gz.javastudy.springsimple.framework.MyService;
 
 
-@Service
+
+@MyService
 public class TestService {
 
     public TestService (){

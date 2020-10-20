@@ -1,4 +1,4 @@
-package com.gz.javastudy.springsimple.demo.annotation;
+package com.gz.javastudy.springsimple.framework;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -1,4 +1,4 @@
-package com.gz.javastudy.springsimple.demo.util;
+package com.gz.javastudy.springsimple.framework.util;
 
 public class Console {
 	public static void info(String info) {
