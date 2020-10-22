@@ -55,6 +55,10 @@ public class AnnotationConfigApplicationContext extends DefaultListableBeanFacto
 	public BeanDefinition getBeanDefinition(String beanDefinitionName) {
 		return beanFactory.getBeanDefinition(beanDefinitionName);
 	}
+	
+	public <T> T getBean(String name, Class<T> requiredType) {
+		return beanFactory.getBean(name, requiredType);
+	}
 
 	public void refresh(){
 		/**

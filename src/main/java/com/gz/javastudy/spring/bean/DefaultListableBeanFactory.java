@@ -12,7 +12,7 @@ import com.gz.javastudy.spring.bean.factory.RootBeanDefinition;
 public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory, BeanDefinitionRegistry{
 
 	//存beanDefinition,key是beanName
-	private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
+	public final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
 
 	private final Map<String,Object> stringObjectMap = new ConcurrentHashMap<>(256);
 

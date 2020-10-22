@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.gz.javastudy.spring.bean.BeanDefinition;
+import com.gz.javastudy.spring.context.Scope;
 import com.gz.javastudy.spring.core.type.AnnotationMetadata;
 import com.gz.javastudy.spring.core.type.filter.TypeFilter;
 
@@ -64,6 +65,12 @@ public class ClassPathScanningCandidateComponentProvider {
     			AnnotatedBeanDefinition bd = new AnnotatedBeanDefinition(clazz);
     			String beanName = Introspector.decapitalize(clazz.getSimpleName());
     			bd.setBeanName(beanName);
+    			Scope scope = clazz.getAnnotation(Scope.class);
+    			if(scope!= null) {
+    				bd.setScope(scope.value());
+    			}else {
+    				bd.setScope("singleton");
+    			}
     			/**
     			 * 判断是否需要注册
     			 */
