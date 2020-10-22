@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.gz.javastudy.spring.bean.factory.DefaultSingletonBeanRegistry;
+import com.gz.javastudy.spring.bean.factory.RootBeanDefinition;
 
-public class DefaultListableBeanFactory implements BeanFactory, BeanDefinitionRegistry{
+
+public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory, BeanDefinitionRegistry{
 
 	//存beanDefinition,key是beanName
 	private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
@@ -71,8 +74,35 @@ public class DefaultListableBeanFactory implements BeanFactory, BeanDefinitionRe
 
 	@Override
 	public void preInstantiateSingletons() {
-		
+		List<String> beanNames = new ArrayList<>(this.beanDefinitionNames);
+		for (String beanName : beanNames) {
+			BeanDefinition bd = this.beanDefinitionMap.get(beanName);
+			getBean(beanName);
+		}	
 		
 	}
 
+
+	@Override
+	public Object getBean(String name) {
+		return doGetBean(name, null, null, false);
+	}
+	
+	protected <T> T doGetBean(final String name, final Class<T> requiredType,
+			 final Object[] args, boolean typeCheckOnly) {
+		String beanName = name;
+		Object bean = null;
+
+		// Eagerly check singleton cache for manually registered singletons.
+		Object sharedInstance = getSingleton(beanName);
+		if (sharedInstance != null && args == null) {
+			
+		}else {
+			// 解决依赖关系，将依赖的bean提前实例化 ,未完成
+			final RootBeanDefinition mbd = (RootBeanDefinition) this.beanDefinitionMap.get(beanName);
+			
+		}
+		
+		return (T) bean;
+	}
 }

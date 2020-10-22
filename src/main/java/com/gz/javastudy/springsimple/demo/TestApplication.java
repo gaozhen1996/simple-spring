@@ -12,7 +12,7 @@ import com.gz.javastudy.springsimple.framework.MyService;
 @MyComponentScan("com.gz.javastudy.springsimple.demo")
 public class TestApplication {
 
-	@MyAutowired("testService")
+	@MyAutowired
 	TestService testService;
 	
 	public static void main(String[] args) throws  Exception {

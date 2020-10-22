@@ -64,8 +64,7 @@ public class AnnotationConfigApplicationContext{
 			Field[] fields = entry.getValue().getClass().getDeclaredFields();
 			for (Field f : fields) {
 				if (f.isAnnotationPresent(MyAutowired.class)) {
-					MyAutowired autowired = f.getAnnotation(MyAutowired.class);
-					String beanName = autowired.value().trim();
+					String beanName = f.getName();
 					f.setAccessible(true);// 设置private
 					if (!beanName.equals("")) {
 						// 将需要的java bean放入实例对象里的属性值中

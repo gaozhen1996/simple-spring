@@ -15,7 +15,7 @@ import com.gz.javastudy.spring.context.support.PostProcessorRegistrationDelegate
  * @description: TODO
  * @date 2019-09-0109:58
  */
-public class AnnotationConfigApplicationContext implements BeanDefinitionRegistry{
+public class AnnotationConfigApplicationContext extends DefaultListableBeanFactory implements BeanDefinitionRegistry{
 	
 	private final AnnotatedBeanDefinitionReader reader;
 	
