@@ -88,7 +88,6 @@ public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry imp
 		}else {
 			// 解决依赖关系，将依赖的bean提前实例化,未完成
 			final RootBeanDefinition mbd = (RootBeanDefinition) this.beanDefinitionMap.get(beanName);
-			
 			/**
 			 * 1.实例化单例的bean
 			 * 2.实例化原型的bean
@@ -99,7 +98,7 @@ public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry imp
 				bean = stringObjectMap.get(name);
 				//缓存中没找到，则需要创建
 				if(bean==null){
-					createBean(beanName, mbd, args);
+					bean = createBean(beanName, mbd, args);
 				}
 			}
 			//2.实例化原型的bean

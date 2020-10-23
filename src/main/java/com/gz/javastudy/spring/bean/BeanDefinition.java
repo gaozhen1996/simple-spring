@@ -7,7 +7,7 @@ public abstract class BeanDefinition {
 	//懒加载
 	private boolean lazyInit = false;
 	
-	private String scope = "";
+	private String scope = "singleton";
 	
 	private final Class<?> introspectedClass;
 	
