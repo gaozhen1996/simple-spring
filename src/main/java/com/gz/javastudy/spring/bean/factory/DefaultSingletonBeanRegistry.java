@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.lang.Nullable;
 
 public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry{
@@ -32,6 +33,22 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry{
 //						this.singletonFactories.remove(beanName);
 //					}
 //				}
+			}
+		}
+		return singletonObject;
+	}
+	
+	public Object getSingleton(String beanName, ObjectFactory<?> singletonFactory) {
+		Object singletonObject = null;
+		synchronized (this.singletonObjects) {
+			singletonObject = this.singletonObjects.get(beanName);
+			if(singletonObject == null) {
+				boolean newSingleton = false;
+				singletonObject = singletonFactory.getObject();
+				newSingleton = true;
+				if(newSingleton) {
+					singletonObjects.put(beanName,singletonObject);
+				}
 			}
 		}
 		return singletonObject;

@@ -5,18 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.lang.Nullable;
 
 import com.gz.javastudy.spring.bean.factory.DefaultSingletonBeanRegistry;
-import com.gz.javastudy.spring.bean.factory.RootBeanDefinition;
 
 
 public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory, BeanDefinitionRegistry{
 
 	//存beanDefinition,key是beanName
 	public final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
-
-	private final Map<String,Object> stringObjectMap = new ConcurrentHashMap<>(256);
 
 	//存放beanName的list
 	private final List<String> beanDefinitionNames  = new ArrayList<>(64);
@@ -43,9 +39,14 @@ public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry imp
 		return beanDefinitionMap.get(beanDefinitionName);
 	}
 
-
-	public Object createBean(String beanName, RootBeanDefinition mbd, @Nullable Object[] args){
+	public Object createBean(String beanName, BeanDefinition mbd,Object[] args){
+		return doCreateBean(beanName, mbd, args);
+	}
+	
+	public Object doCreateBean(String beanName, BeanDefinition mbd,Object[] args){
 		Object bean = null;
+		// Instantiate the bean.
+		//spring源码中是在createBeanInstance()方法中来实例化的
 		Class<?>  introspectedClass = mbd.getIntrospectedClass();
 		try {
 			synchronized (mbd.lock){
@@ -56,19 +57,45 @@ public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry imp
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
+		
+		// Allow post-processors to modify the merged bean definition.
+		// 暂不实现
+		
+		// Eagerly cache singletons to be able to resolve circular references
+		// even when triggered by lifecycle interfaces like BeanFactoryAware.
+		// 暂不实现
+		
+		// Initialize the bean instance.
+		// 解决循环依赖
+		//populateBean(beanName, mbd, instanceWrapper);
+		
 		return bean;
 	}
 
+
+	
 	@Override
 	public void preInstantiateSingletons() {
 		List<String> beanNames = new ArrayList<>(this.beanDefinitionNames);
+		//实例化非懒加载的bean
 		for (String beanName : beanNames) {
+			System.out.println("Instantiate:"+beanName);
 			BeanDefinition bd = this.beanDefinitionMap.get(beanName);
-			getBean(beanName);
+			//实际上还需要判断是不是抽象类，此处为了简化，没有实现
+			if(!bd.isLazyInit() && bd.getScope().equals("singleton")) {
+				if(isFactoryBean(beanName)) {
+
+				}else {
+					getBean(beanName);	
+				}
+			}
 		}	
 		
 	}
-
+	public boolean isFactoryBean(String name) {
+		//未实现
+		return false;
+	}
 
 	@Override
 	public Object getBean(String name) {
@@ -79,33 +106,30 @@ public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry imp
 	protected <T> T doGetBean(final String name, final Class<T> requiredType,
 			 final Object[] args, boolean typeCheckOnly) {
 		String beanName = name;
-		Object bean = null;
 
 		// Eagerly check singleton cache for manually registered singletons.
 		Object sharedInstance = getSingleton(beanName);
 		if (sharedInstance != null && args == null) {
 			
 		}else {
-			// 解决依赖关系，将依赖的bean提前实例化,未完成
-			final RootBeanDefinition mbd = (RootBeanDefinition) this.beanDefinitionMap.get(beanName);
+			final BeanDefinition mbd = this.beanDefinitionMap.get(beanName);
+			//解决依赖关系，将依赖的bean提前实例化,未完成
+			
 			/**
 			 * 1.实例化单例的bean
 			 * 2.实例化原型的bean
 			 */
 			//1.实例化单例的bean
 			if(mbd.getScope().equals("singleton")) {
-				//先尝试从缓存中获取
-				bean = stringObjectMap.get(name);
-				//缓存中没找到，则需要创建
-				if(bean==null){
-					bean = createBean(beanName, mbd, args);
-				}
+				sharedInstance = getSingleton(beanName, () -> {
+					return createBean(beanName, mbd, args);
+				});
 			}
 			//2.实例化原型的bean
-			else if(mbd.getScope().equals("protype")) {
-				createBean(beanName, mbd, args);
+			else if(mbd.getScope().equals("prototype")) {
+				sharedInstance = createBean(beanName, mbd, args);
 			}
 		}
-		return (T) bean;
+		return (T) sharedInstance;
 	}
 }
