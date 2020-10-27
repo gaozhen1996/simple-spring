@@ -14,9 +14,9 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry{
 	private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
 	
 	/** Cache of early singleton objects: bean name to bean instance. */
-	private final Map<String, Object> earlySingletonObjects = new HashMap<>(16);
+	protected final Map<String, Object> earlySingletonObjects = new HashMap<>(16);
 	
-	private final Set<String> singletonsCurrentlyInCreation =
+	protected final Set<String> singletonsCurrentlyInCreation =
 			Collections.newSetFromMap(new ConcurrentHashMap<>(16));
 	
 	@Nullable
@@ -62,4 +62,5 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry{
 	public Object getSingleton(String beanName) {
 		return getSingleton(beanName, true);
 	}
+
 }

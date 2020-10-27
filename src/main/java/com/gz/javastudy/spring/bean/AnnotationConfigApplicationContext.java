@@ -31,7 +31,7 @@ public class AnnotationConfigApplicationContext extends DefaultListableBeanFacto
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClass) {
 		this();
 		this.reader.register(annotatedClass);
-		refresh();
+		refresh();		
 	}
 	
 	/**
@@ -69,11 +69,10 @@ public class AnnotationConfigApplicationContext extends DefaultListableBeanFacto
 			
 			// Instantiate all remaining (non-lazy-init) singletons.
 			finishBeanFactoryInitialization(beanFactory);	
-			
+		
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
 	}
 
 

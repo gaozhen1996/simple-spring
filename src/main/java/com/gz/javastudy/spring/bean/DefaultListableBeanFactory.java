@@ -1,5 +1,6 @@
 package com.gz.javastudy.spring.bean;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -7,19 +8,26 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 import com.gz.javastudy.spring.bean.factory.DefaultSingletonBeanRegistry;
+import com.gz.javastudy.spring.context.Autowired;
 
 
 public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory, BeanDefinitionRegistry{
 
 	//存beanDefinition,key是beanName
-	public final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
+	private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
 
 	//存放beanName的list
 	private final List<String> beanDefinitionNames  = new ArrayList<>(64);
 
 	@Override
 	public <T> T getBean(String name, Class<T> requiredType) {
-		return doGetBean(name, null, null, false);
+		T bean = null;
+		try {
+			bean =  doGetBean(name, null, null, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bean;
 	}
 
 	@Override
@@ -51,6 +59,8 @@ public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry imp
 		try {
 			synchronized (mbd.lock){
 				bean = introspectedClass.newInstance();
+				super.singletonsCurrentlyInCreation.add(beanName);
+				super.earlySingletonObjects.put(beanName, bean);
 			}
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -67,11 +77,28 @@ public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry imp
 		
 		// Initialize the bean instance.
 		// 解决循环依赖
-		//populateBean(beanName, mbd, instanceWrapper);
-		
+		populateBean(beanName, mbd, bean);
+		super.singletonsCurrentlyInCreation.remove(beanName);
+		super.earlySingletonObjects.remove(beanName);
 		return bean;
 	}
-
+	
+	protected void populateBean(String beanName,BeanDefinition beanDefinition,Object instance) {
+		Field[] fields = beanDefinition.getIntrospectedClass().getDeclaredFields();
+		try {
+			for (Field field : fields) {
+				if(field.isAnnotationPresent(Autowired.class)) {
+					field.setAccessible(true);
+					
+					Object fieldInstance = getBean(field.getName());
+					field.set(instance, fieldInstance);
+				}
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	
 	@Override
@@ -90,7 +117,6 @@ public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry imp
 				}
 			}
 		}	
-		
 	}
 	public boolean isFactoryBean(String name) {
 		//未实现
@@ -99,12 +125,18 @@ public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry imp
 
 	@Override
 	public Object getBean(String name) {
-		return doGetBean(name, null, null, false);
+		Object bean = null;
+		try {
+			bean =  doGetBean(name, null, null, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bean;
 	}
 	
 	@SuppressWarnings("unchecked")
 	protected <T> T doGetBean(final String name, final Class<T> requiredType,
-			 final Object[] args, boolean typeCheckOnly) {
+			 final Object[] args, boolean typeCheckOnly) throws Exception {
 		String beanName = name;
 
 		// Eagerly check singleton cache for manually registered singletons.
@@ -113,7 +145,8 @@ public class DefaultListableBeanFactory extends DefaultSingletonBeanRegistry imp
 			
 		}else {
 			final BeanDefinition mbd = this.beanDefinitionMap.get(beanName);
-			//解决依赖关系，将依赖的bean提前实例化,未完成
+			if(mbd == null)
+				throw new Exception("not fund bean ["+ name +"] in beanFactory!");
 			
 			/**
 			 * 1.实例化单例的bean
