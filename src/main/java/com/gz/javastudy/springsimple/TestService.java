@@ -1,4 +1,4 @@
-package com.gz.javastudy.springsimple.demo.service;
+package com.gz.javastudy.springsimple;
 
 import javax.annotation.PostConstruct;
 
