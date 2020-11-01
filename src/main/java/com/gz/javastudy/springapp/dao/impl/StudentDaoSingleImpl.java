@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
  * @date 2019-10-1915:34
  */
 @Repository
-
 public class StudentDaoSingleImpl implements StudentDao {
 
     @Override
