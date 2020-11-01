@@ -26,7 +26,7 @@ public abstract class StudentService {
     public abstract StudentDao getStudentDao();
 
     public void getStudentById(){
-    	System.out.println("  注入单例的属性StudentDao="+studentDaoSingleImpl);
+    	System.out.println("注入单例的属性StudentDao="+studentDaoSingleImpl);
         System.out.println("注入非单例的属性StudentDao="+getStudentDao());
         System.out.println(this);
         getStudentDao().getStudentById(100001);

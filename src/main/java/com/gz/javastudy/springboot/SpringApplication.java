@@ -22,14 +22,23 @@ public class SpringApplication {
 	        // Load Spring web application configuration
 	        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 	        context.register(AppConfig.class);
-	        
+
 	        // Create and register the DispatcherServlet
 	        DispatcherServlet servlet = new DispatcherServlet(context);
+	        /**
+	         * 代替web.xml文件
+	         * <servlet>   
+  　　　　    *   <servlet-name>MyServlet</servlet-name>   
+  　　　　    *   <servlet-class>com.mycompany.mypackage.MyServlet</servlet-class>   
+  　　　　    *   <load-on-startup>1</load-on-startup>   
+  　　       * </servlet>  
+	         */
 	        Wrapper mvc = tomcat.addServlet("/", "app", servlet);
 	        mvc.setLoadOnStartup(1);
 	        mvc.addMapping("/");
-			
-			
+	        /**
+	         * tomcat start的时候会执行servlet的init方法
+	         */
 			tomcat.start();	
 			tomcat.getServer().await();
 		} catch (Exception e) {
