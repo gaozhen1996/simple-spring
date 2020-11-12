@@ -26,7 +26,11 @@ public class Response {
         FileInputStream fis = null;
         PrintStream writer = null;
         try {
-            File file = new File(HttpServer.WEB_ROOT,request.getUri());
+        	String uri = request.getUri();
+        	if(request.getUri()==null) {
+        		uri = "index.html";
+        	}
+            File file = new File(HttpServer.WEB_ROOT,uri);
             if (file.exists()){
                 //HTTP协议头部
                 String responseHead = "HTTP/1.1 200 ok\r\nContent-Type: text/html\r\nContent-Length: "+file.length()+"\r\n\r\n";
