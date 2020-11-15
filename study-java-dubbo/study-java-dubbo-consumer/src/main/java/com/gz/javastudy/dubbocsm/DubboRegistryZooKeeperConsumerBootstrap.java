@@ -1,6 +1,8 @@
 package com.gz.javastudy.dubbocsm;
 
-import org.apache.dubbo.config.annotation.Reference;
+
+import org.apache.dubbo.config.annotation.DubboReference;
+
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -8,16 +10,18 @@ import org.springframework.context.annotation.Bean;
 
 import com.gz.javastudy.dubboapi.DemoService;
 
-
-@SuppressWarnings("deprecation")
+/**
+ * Dubbo Registry ZooKeeper Consumer Bootstrap
+ */
 @EnableAutoConfiguration
-public class DubboAutoConfigurationConsumerBootstrap {
+public class DubboRegistryZooKeeperConsumerBootstrap {
 
-    @Reference(version = "1.0.0", url = "dubbo://192.168.1.82:12345")
+
+    @DubboReference(version = "${demo.service.version}")
     private DemoService demoService;
 
     public static void main(String[] args) {
-        SpringApplication.run(DubboAutoConfigurationConsumerBootstrap.class).close();
+        SpringApplication.run(DubboRegistryZooKeeperConsumerBootstrap.class).close();
     }
 
     @Bean
