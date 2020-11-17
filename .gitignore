@@ -1,8 +1,11 @@
 .DS_Store
 /**/.DS_Store
-.idea/
+
 .classpath
 .project
 .settings/*
 /**/.settings/*
 /**/target/
+
+.idea/
+*.iml

@@ -30,7 +30,7 @@ import com.gz.javastudy.springapp.service.StudentService;
 public class TestSpringApp {
 
     public static void main(String[] args) {
-    	int flag  = 1;
+    	int flag  = 2;
     	switch (flag) {
 		case 1:
 			//======================================测试单例对象中，含有非单例的属性========================================
