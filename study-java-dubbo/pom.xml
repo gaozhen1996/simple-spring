@@ -16,6 +16,8 @@
 		<module>study-java-dubbo-api</module>
 		<module>study-java-dubbo-consumer</module>
 		<module>study-java-dubbo-provider</module>
+        <module>study-java-dubbo-connozk</module>
+        <module>study-java-dubbo-pronozk</module>
 	</modules>
 
 	<properties>

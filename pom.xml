@@ -8,6 +8,7 @@
 	<modules>
 		<module>study-java-algo</module>
 		<module>study-java-concurrent</module>
+		<module>study-java-dubbo</module>
 		<module>study-java-jvm</module>
 		<module>study-java-pattern</module>
 		<module>study-java-se</module>
