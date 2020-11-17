@@ -18,7 +18,7 @@
         <property name="password" value="FD20180816B"/> -->
 		<!-- use sqllite -->
         <property name="driver" value="org.sqlite.JDBC"/>
-        <property name="url" value="jdbc:sqlite:gz.db"/>
+        <property name="url" value="jdbc:sqlite::resource:mybatis/gz.db"/>
         
       </dataSource>
     </environment>
