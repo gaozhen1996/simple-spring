@@ -31,7 +31,7 @@ public class MyBatisUseSpringConfig {
 		 * use sqlplie
 		 */
 		driverManagerDataSource.setDriverClassName("org.sqlite.JDBC");  //加载驱动
-		String url = "jdbc:sqlite:gz.db";  //数据库路径
+		String url = "jdbc:sqlite::resource:mybatis/gz.db";  //数据库路径
 		driverManagerDataSource.setUrl(url);
 		
 		return driverManagerDataSource;
