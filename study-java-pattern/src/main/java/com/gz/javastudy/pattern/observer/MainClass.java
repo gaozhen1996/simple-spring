@@ -4,7 +4,7 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		
-		Subject s = new Subject();
+		Master s = new Master();
 		s.attach(new Cat());
 		s.attach(new Dog());
 		s.notifyAllObservers();

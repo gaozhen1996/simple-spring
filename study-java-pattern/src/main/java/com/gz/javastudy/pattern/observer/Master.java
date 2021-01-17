@@ -3,7 +3,7 @@ package com.gz.javastudy.pattern.observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subject {
+public class Master {
 
 	private List<ICallbackService> observers = new ArrayList<ICallbackService>();
 	
