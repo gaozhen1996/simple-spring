@@ -19,6 +19,7 @@ public class SpringApplication {
 			tomcat.addContext("/", WEB_ROOT);
 			
 	    	System.out.println("====================init===============================");
+	    	System.out.println("WEB_ROOT:"+WEB_ROOT);
 	        // Load Spring web application configuration
 	        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 	        context.register(AppConfig.class);
