@@ -11,6 +11,7 @@
 		<module>study-java-dubbo</module>
 		<module>study-java-jvm</module>
 		<module>study-java-pattern</module>
+		<module>study-java-redis</module>
 		<module>study-java-se</module>
 		<module>study-java-spring</module>
 		<module>study-java-tomcat</module>
