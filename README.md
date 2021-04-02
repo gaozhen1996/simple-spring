@@ -13,7 +13,6 @@
   - mybatisapp      学习mybatis源码的包  
   - spring                自己实现spring
   - springapp         spring应用
-  - springboot        学习springboot
   - springsimple    非常简单的spring原理
-- 
+- study-java-springboot  学习springboot原理
 - study-java-tomcat               实现简单的tomcat
