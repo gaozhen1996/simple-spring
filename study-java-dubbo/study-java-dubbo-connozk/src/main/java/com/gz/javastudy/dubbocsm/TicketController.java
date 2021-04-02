@@ -2,6 +2,7 @@ package com.gz.javastudy.dubbocsm;
 
 import java.util.HashMap;
 
+import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class TicketController {
 	
 	@Autowired
 	private Environment environment;
+	
+	@Autowired
+	private RedisConfig redisConfig;
 	 
 	public String getPort(){
 	  return environment.getProperty("local.server.port");
@@ -39,10 +43,16 @@ public class TicketController {
 	@RequestMapping("/sell")
 	public HashMap<String, String> sell() {
 		HashMap<String, String> returnData = new HashMap<String, String>();
-		int num = ticketService.get();
-		returnData.put("num-"+getPort(), ""+num);
-		if (num>0){
-			ticketService.del();
+		RLock lock =  redisConfig.getRedissonClient().getLock("anyLock");
+		lock.lock();
+		try {
+			int num = ticketService.get();
+			returnData.put("num-"+getPort(), ""+num);
+			if (num>0){
+				ticketService.del();
+			}
+		} finally {
+			lock.unlock();
 		}
 		return returnData;
 	}
