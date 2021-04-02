@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Config {
 	
+	public static final int PORT = 8081; 
+	
 	private SqlSession sqlSession;
 	
 	@PostConstruct

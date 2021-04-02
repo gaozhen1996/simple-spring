@@ -13,7 +13,7 @@ public class TicketService {
 	public Ticket getTicket() {
 		SqlSession session = config.getSqlSession();
 		TicketDao dao = session.getMapper(TicketDao.class);
-		return dao.selectTicket();
+		return dao.selectTicket().get(0);
 	}
 	
 	public int updateTicket(int num) {
@@ -21,6 +21,7 @@ public class TicketService {
 		ticket.setId(num);
 		SqlSession session = config.getSqlSession();
 		TicketDao dao = session.getMapper(TicketDao.class);
+		session.commit();
 		return dao.updateTicket(ticket);
 	}
 	
