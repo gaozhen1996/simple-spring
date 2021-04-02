@@ -13,7 +13,7 @@
 		<module>study-java-pattern</module>
 		<module>study-java-se</module>
 		<module>study-java-spring</module>
-		<module>study-java-springboot</module>
+		<module>study-java-redis</module>
 		<module>study-java-tomcat</module>
 	</modules>
 

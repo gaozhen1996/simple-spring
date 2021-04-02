@@ -9,11 +9,11 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>study-java-springboot</artifactId>
+	<artifactId>study-java-redis</artifactId>
 	<packaging>jar</packaging>
 
 	<name>study java redis</name>
-	<description>for study springboot</description>
+	<description>for study redis</description>
 
 
 	<dependencies>

@@ -8,23 +8,23 @@ import org.apache.catalina.startup.Tomcat;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.gz.javastudy.sellticket.Config;
 
 public class SpringApplication {
 	
 	public static final String WEB_ROOT = System.getProperty("user.dir") + File.separator + "src/main/resources";
 
 	@SuppressWarnings("rawtypes")
-	public static void run(Class registerClass) {
+	public static AnnotationConfigWebApplicationContext run(Class registerClass,int port) {
 		Tomcat tomcat = new Tomcat();
+		AnnotationConfigWebApplicationContext context = null;
 		try {
-			tomcat.setPort(Config.PORT);
+			tomcat.setPort(port);
 			tomcat.addContext("/", WEB_ROOT);
 			
 	    	System.out.println("====================init===============================");
 	    	System.out.println("WEB_ROOT:"+WEB_ROOT);
 	        // Load Spring web application configuration
-	        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+	        context = new AnnotationConfigWebApplicationContext();
 	        context.register(registerClass);
 
 	        // Create and register the DispatcherServlet
@@ -48,5 +48,7 @@ public class SpringApplication {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return context;
 	}
 }
