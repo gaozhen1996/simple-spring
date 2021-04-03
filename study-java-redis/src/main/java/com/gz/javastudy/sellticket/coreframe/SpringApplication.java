@@ -11,7 +11,8 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 public class SpringApplication {
 	
-	public static final String WEB_ROOT = System.getProperty("user.dir") + File.separator + "src/main/resources";
+	public static final String WEB_ROOT = System.getProperty("user.dir") +File.separator+"study-java-redis"
+			+File.separator + "src/main/resources";
 
 	@SuppressWarnings("rawtypes")
 	public static AnnotationConfigWebApplicationContext run(Class registerClass,int port) {
