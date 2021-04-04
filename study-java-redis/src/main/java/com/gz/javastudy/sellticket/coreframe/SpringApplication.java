@@ -44,7 +44,8 @@ public class SpringApplication {
 	        /**
 	         * tomcat start的时候会执行servlet的init方法
 	         */
-			tomcat.start();	
+			tomcat.start();
+			System.out.println("service start，port："+port);
 			tomcat.getServer().await();
 		} catch (Exception e) {
 			e.printStackTrace();
