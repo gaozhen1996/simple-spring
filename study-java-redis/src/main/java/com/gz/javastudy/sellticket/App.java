@@ -12,7 +12,7 @@ import com.gz.javastudy.sellticket.coreframe.SpringApplication;
 @MapperScan("com.gz.javastudy.sellticket.repository")
 public class App{
 	
-	public static final int PORT = 8081;
+	public static final int PORT = 8084;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(App.class,PORT);
