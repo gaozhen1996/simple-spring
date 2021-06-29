@@ -11,7 +11,7 @@
 
 	<artifactId>study-java-dubbo-consumer</artifactId>
 	<packaging>jar</packaging>
-	<name>study javase</name>
+	<name>study dubbo consumer</name>
 	<description>for study dubbo</description>
 
 	<dependencies>

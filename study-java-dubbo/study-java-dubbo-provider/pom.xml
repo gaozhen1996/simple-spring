@@ -10,7 +10,7 @@
 
 	<artifactId>study-java-dubbo-provider</artifactId>
 	<packaging>jar</packaging>
-	<name>study javase</name>
+	<name>study dubbo provider</name>
 	<description>for study dubbo</description>
 
 	<dependencies>
