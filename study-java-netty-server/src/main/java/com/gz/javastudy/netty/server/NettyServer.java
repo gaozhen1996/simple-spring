@@ -10,10 +10,12 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
+
 public class NettyServer {
     public static  String SERVER_PATH = "/netty";
     public static void main(String[] args) throws Exception {
         start();
+
     }
     public static void start() {
         /**
@@ -43,6 +45,9 @@ public class NettyServer {
                     socketChannel.pipeline().addLast(new ServerHandler());
                 }
             });
+            /**
+             * 
+             */
             //同步绑定端口
             ChannelFuture future = serverBootstrap.bind(8080).sync();
             //阻塞主线程，直到Socket通道关闭
