@@ -19,7 +19,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 	 */
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		System.out.println(((ByteBuf)msg).toString(Charset.defaultCharset()));
+//		System.out.println(((ByteBuf)msg).toString(Charset.defaultCharset()));
 //			 if(msg instanceof ByteBuf) {
 //				 //ByteBuf的toString方法把二进制数据转换成字符串，默认编码UTF-8
 //				 System.out.println(((ByteBuf)msg).toString(Charset.defaultCharset()));
@@ -27,7 +27,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 //			ctx.channel().writeAndFlush("msg has recived!");
 		//获取客户端发送的请求，并转换成RequestFuture对象，
 		//由于经过StringDecoder解码器，因此msg为String类型
-		RequestFuture request = JSONObject.parseObject(msg.toString(),RequestFuture.class);
+		RequestFuture request = JSONObject.parseObject(((ByteBuf)msg).toString(Charset.defaultCharset()),RequestFuture.class);
 //		 //获取请求id
 //		 long id = request.getId();
 //		 System.out.println("请求信息为==="+msg.toString());
@@ -44,6 +44,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 //			 }
 //		 };
 		//把响应结果返回给客户端
+		System.out.println(JSONObject.toJSONString(response));
 		ctx.channel().write(JSONObject.toJSONString(response));
 		ctx.channel().unsafe().flush();
 	}
