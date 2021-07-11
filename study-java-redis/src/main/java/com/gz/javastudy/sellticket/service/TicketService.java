@@ -1,7 +1,6 @@
 package com.gz.javastudy.sellticket.service;
 
 import com.gz.javastudy.sellticket.config.RedisConfig;
-import org.redisson.api.RBucket;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

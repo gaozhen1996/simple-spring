@@ -36,17 +36,18 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 //		 response.setId(id);
 //		 response.setResult("服务器响应ok"+id);
 		Response response = Mediator.process(request);
-//		 new Thread(){
-//			 @Override
-//			 public void run() {
-//				 //把响应结果返回给客户端
-//				 ctx.channel().writeAndFlush(JSONObject.toJSONString(response));
-//			 }
-//		 };
+		 new Thread(){
+			 @Override
+			 public void run() {
+				 //把响应结果返回给客户端
+				 ctx.channel().writeAndFlush(JSONObject.toJSONString(response));
+			 }
+		 };
 		//把响应结果返回给客户端
 		System.out.println(JSONObject.toJSONString(response));
-		ctx.channel().write(JSONObject.toJSONString(response));
-		ctx.channel().unsafe().flush();
+//		ctx.writeAndFlush(JSONObject.toJSONString(response));
+//		ctx.channel().write(JSONObject.toJSONString(response));
+//		ctx.channel().unsafe().flush();
 	}
 
 	@Override

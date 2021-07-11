@@ -34,6 +34,7 @@ public class RequestFuture {
 		synchronized (this) {
 			while(this.result==null) {
 				try {
+					System.out.println(this.result);
 				 /**主线程默认等待1s，然后再查看是否获取到结果*/
 					this.wait(timeout);
 				} catch (InterruptedException e) {
