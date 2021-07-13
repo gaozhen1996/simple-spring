@@ -11,7 +11,8 @@ public class Application {
             AnnotationConfigApplicationContext context =
                     new AnnotationConfigApplicationContext(
                             "com.gz.javastudy.netty.server",
-                            "com.gz.javastudy.netty.spring");
+                            "com.gz.javastudy.netty.spring",
+                            "com.gz.javastudy.netty.controller");
             //在jvm中增加一个关闭的钩子,当jvm关闭的时候，
             //会执行系统中已经设置的所有通过方法addShutdownHook
             //添加的钩子，当系统执行完这些钩子后，jvm才会关闭。
@@ -20,6 +21,7 @@ public class Application {
                     try {
                         context.stop();
                     } catch (Throwable t) {
+                        t.printStackTrace();
                     }
                     synchronized (Application.class) {
                         running = false;

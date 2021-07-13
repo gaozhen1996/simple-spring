@@ -30,7 +30,7 @@ public class ClientSocket {
 						if (bufferedInputStream.available() > 0){
 							byte[] receive = new byte[1024];
 							int read = bufferedInputStream.read(receive);
-							System.out.println("客服端收到消息："+new String(receive));
+							System.out.println("客服端收到消息："+new String(receive,"UTF-8"));
 						} else {
 							Thread.sleep(50);
 						}

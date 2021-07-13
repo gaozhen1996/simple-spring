@@ -1,7 +1,6 @@
 package com.gz.javastudy.netty.client;
 
 import java.nio.charset.Charset;
-
 import com.alibaba.fastjson.JSONObject;
 import com.gz.javastudy.netty.asyn.RequestFuture;
 import io.netty.bootstrap.Bootstrap;
@@ -18,20 +17,20 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 public class NettyClient {
-    //开启一个线程组
-    public static EventLoopGroup group = new NioEventLoopGroup(100);
-
-    public static Bootstrap getBootstrap() {
+    public static EventLoopGroup group;
+    public static Bootstrap bootstrap;
+    public static ChannelFuture future;
+    public static Bootstrap getBootstrap(){
         //客户端启动辅助类
-        Bootstrap bootstrap = new Bootstrap();
+        bootstrap = new Bootstrap();
+        //开启一个线程组
+        group = new NioEventLoopGroup();
         //设置socket通道
         bootstrap.channel(NioSocketChannel.class);
         bootstrap.group(group);
         //设置内存分配器
         bootstrap.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
         final ClientHandler handler = new ClientHandler();
-        //把promise对象赋给handler，用于获取返回服务器响应结果
-//		handler.setPromise(promise);
         //把handler加入到管道中
         bootstrap.handler(new ChannelInitializer<NioSocketChannel>() {
             @Override
@@ -58,34 +57,44 @@ public class NettyClient {
                 ch.pipeline().addLast(new StringEncoder(Charset.forName("utf-8")));
             }
         });
+
+        try {
+            future = bootstrap.connect("127.0.0.1",8080).sync();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return bootstrap;
     }
 
 
-    public static Object sendRequest(RequestFuture request) throws Exception {
+    public  Object sendRequest(String path,Object msg) throws Exception {
         try {
+            //构建request
+            RequestFuture request = new RequestFuture();
+            request.setPath(path);
+            //请求消息内容，此处内容可以任意Java对象
+            request.setRequest(msg);
+            //转换成JSON发送给编码器StringEncode,
+            //StringEncode编码器再发送给LengthFieldPrepender长度编码器，最终写到tcp缓存中并传送给客户端
             String requestStr = JSONObject.toJSONString(request);
-
-//			ChannelFuture future = ChannelFutureManager.get();
-            ChannelFuture future = getBootstrap().connect("127.0.0.1", 8080).sync();
             future.channel().writeAndFlush(requestStr);
             //同步等待响应结果，当promise有值了才会继续往下执行
             Object result = request.get();
-			System.out.println("A:"+result);
             return result;
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
+
     }
+
 
     public static void main(String[] args) throws Exception {
         NettyClient client = new NettyClient();
-        for (int i = 0; i < 100; i++) {
-            RequestFuture request = new RequestFuture();
-            //设置参数
-            request.setRequest("" + i);
-            Object result = client.sendRequest(request);
+        NettyClient.getBootstrap();
+        for(int i=0;i<100;i++) {
+            Object result = client.sendRequest("com.gz.javastudy.netty.controller.IUserController.getUserNameById",i+"");
             System.out.println(result);
         }
     }

@@ -5,11 +5,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gz.javastudy.netty.asyn.RequestFuture;
 import com.gz.javastudy.netty.asyn.Response;
-
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * 此类主要对Netty网络通信
  * 与业务处理逻辑类起到一个沟通的关联作用

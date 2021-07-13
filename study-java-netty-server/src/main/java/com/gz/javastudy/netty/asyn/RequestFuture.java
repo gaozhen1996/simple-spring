@@ -17,7 +17,7 @@ public class RequestFuture {
 	//超时时间默认1s
 	private long timeout=5000;
 	//自增id
-	private static final AtomicLong aid=new AtomicLong(1);
+	private static final AtomicLong aid=new AtomicLong(0);
 	public RequestFuture() {
 		//当前值新增1并返回结果给id
 		id = aid.incrementAndGet();
@@ -34,7 +34,6 @@ public class RequestFuture {
 		synchronized (this) {
 			while(this.result==null) {
 				try {
-					System.out.println(this.result);
 				 /**主线程默认等待1s，然后再查看是否获取到结果*/
 					this.wait(timeout);
 				} catch (InterruptedException e) {
@@ -50,11 +49,11 @@ public class RequestFuture {
 		RequestFuture future = futures.remove(resp.getId());
 		//设置响应结果
 		if(future!=null) {
-			 future.setResult(resp.getResult());
-				/**通知主线程*/
-				synchronized (future) {
-					future.notify();
-				}
+			future.setResult(resp.getResult());
+			/**通知主线程*/
+			synchronized (future) {
+				future.notify();
+			}
 		}
 		   
 	}
