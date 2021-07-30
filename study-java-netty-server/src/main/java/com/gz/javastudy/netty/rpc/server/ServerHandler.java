@@ -1,10 +1,9 @@
-package com.gz.javastudy.netty.server;
+package com.gz.javastudy.netty.rpc.server;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gz.javastudy.netty.asyn.RequestFuture;
-import com.gz.javastudy.netty.asyn.Response;
-import com.gz.javastudy.netty.core.Mediator;
-import com.gz.javastudy.netty.spring.InitLoadRemoteMethod;
+import com.gz.javastudy.netty.rpc.asyn.RequestFuture;
+import com.gz.javastudy.netty.rpc.asyn.Response;
+import com.gz.javastudy.netty.rpc.core.Mediator;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -24,17 +23,22 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
 		logger.info("接收消息:"+msg);
-		//获取客户端发送的请求，并转换成RequestFuture对象，
-		//由于经过StringDecoder解码器，因此msg为String类型
-		RequestFuture request = JSONObject.parseObject((String) msg,RequestFuture.class);
-		//获取请求id
-		long id = request.getId();
-		 //构建响应结果
-		Response response = Mediator.process(request);
-		response.setId(id);
-		//把响应结果返回给客户端
-		logger.info("发送消息:"+JSONObject.toJSONString(response));
-		ctx.channel().write(Unpooled.copiedBuffer(JSONObject.toJSONString(response).getBytes()));
+		try {
+			//获取客户端发送的请求，并转换成RequestFuture对象，
+			//由于经过StringDecoder解码器，因此msg为String类型
+			RequestFuture request = JSONObject.parseObject((String) msg, RequestFuture.class);
+			//获取请求id
+			long id = request.getId();
+			//构建响应结果
+			Response response = Mediator.process(request);
+			response.setId(id);
+			//把响应结果返回给客户端
+			logger.info("发送消息:"+JSONObject.toJSONString(response));
+			ctx.channel().write(Unpooled.copiedBuffer(JSONObject.toJSONString(response).getBytes()));
+		}catch (Exception e){
+
+
+		}
 		ctx.channel().unsafe().flush();
 	}
 

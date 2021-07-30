@@ -1,4 +1,4 @@
-package com.gz.javastudy.netty.asyn;
+package com.gz.javastudy.netty.rpc.asyn;
 public class Response {
 	private long id;
 	private Object result;

@@ -1,9 +1,8 @@
-package com.gz.javastudy.netty.client;
+package com.gz.javastudy.netty.rpc.client;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gz.javastudy.netty.asyn.RequestFuture;
-import com.gz.javastudy.netty.asyn.Response;
-import com.gz.javastudy.netty.server.ServerHandler;
+import com.gz.javastudy.netty.rpc.asyn.RequestFuture;
+import com.gz.javastudy.netty.rpc.asyn.Response;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 

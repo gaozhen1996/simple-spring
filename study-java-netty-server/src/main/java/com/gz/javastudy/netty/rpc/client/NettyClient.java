@@ -1,8 +1,7 @@
-package com.gz.javastudy.netty.client;
+package com.gz.javastudy.netty.rpc.client;
 
-import java.nio.charset.Charset;
 import com.alibaba.fastjson.JSONObject;
-import com.gz.javastudy.netty.asyn.RequestFuture;
+import com.gz.javastudy.netty.rpc.asyn.RequestFuture;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelFuture;
@@ -15,6 +14,8 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+
+import java.nio.charset.Charset;
 
 public class NettyClient {
     public static EventLoopGroup group;
@@ -93,6 +94,17 @@ public class NettyClient {
     public static void main(String[] args) throws Exception {
         NettyClient client = new NettyClient();
         NettyClient.getBootstrap();
+
+        for (int i=0;i<10000;i++){
+            future.channel().write("{AAAA}");
+            future.channel().flush();
+        }
+
+//        testRpc(client);
+        System.exit(0);
+    }
+
+    private static void testRpc(NettyClient client) throws Exception {
         for(int i=0;i<100;i++) {
             Object result = client.sendRequest("com.gz.javastudy.netty.controller.IUserController.getUserNameById",i+"");
             System.out.println(result);

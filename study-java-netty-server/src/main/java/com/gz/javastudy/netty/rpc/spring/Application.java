@@ -1,4 +1,4 @@
-package com.gz.javastudy.netty.spring;
+package com.gz.javastudy.netty.rpc.spring;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

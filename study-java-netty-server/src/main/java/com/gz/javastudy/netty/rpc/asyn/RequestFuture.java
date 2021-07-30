@@ -1,4 +1,4 @@
-package com.gz.javastudy.netty.asyn;
+package com.gz.javastudy.netty.rpc.asyn;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class RequestFuture {
 	//请求缓存类，key为每次请求id，value为请求对象
-	public static Map<Long,RequestFuture> futures = new ConcurrentHashMap<Long,RequestFuture>();
+	public static Map<Long, RequestFuture> futures = new ConcurrentHashMap<Long, RequestFuture>();
 	//每次请求id，id可以设置原子性增长
 	private long  id;
 	private String path;

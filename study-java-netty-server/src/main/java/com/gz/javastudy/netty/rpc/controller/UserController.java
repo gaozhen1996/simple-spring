@@ -1,10 +1,10 @@
-package com.gz.javastudy.netty.controller;
-import com.gz.javastudy.netty.annotation.Remote;
+package com.gz.javastudy.netty.rpc.controller;
+import com.gz.javastudy.netty.rpc.annotation.Remote;
 import org.springframework.stereotype.Controller;
 
 @Controller
 @Remote
-public class UserController implements IUserController{
+public class UserController implements IUserController {
 
     //此方法用于远程调用，需要加上Remote注解
     @Override

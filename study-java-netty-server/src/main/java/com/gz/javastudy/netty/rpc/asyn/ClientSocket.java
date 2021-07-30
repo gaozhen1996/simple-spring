@@ -1,6 +1,8 @@
-package com.gz.javastudy.netty.asyn;
+package com.gz.javastudy.netty.rpc.asyn;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 

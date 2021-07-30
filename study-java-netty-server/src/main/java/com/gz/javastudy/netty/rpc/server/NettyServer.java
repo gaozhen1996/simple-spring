@@ -1,4 +1,4 @@
-package com.gz.javastudy.netty.server;
+package com.gz.javastudy.netty.rpc.server;
 
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -55,8 +55,7 @@ public class NettyServer {
                     // 第四个参数是长度值的调节，假如请求包的大小是20个字节，
                     // 长度值没包含本身的话应该是20，假如长度值包含了本身就是24，需要调整4个字节
                     // 第五个参数,解析时候需要跳过的字节长,此处为4，跳过长度值字节数
-                    ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,
-                            0, 4, 0, 4));
+                    ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
                     // 把接收到的Bytebuf数据包转换成String
                     ch.pipeline().addLast(new StringDecoder());
                     /**

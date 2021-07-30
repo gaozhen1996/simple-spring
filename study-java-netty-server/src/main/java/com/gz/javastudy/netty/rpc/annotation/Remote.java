@@ -1,6 +1,7 @@
-package com.gz.javastudy.netty.annotation;
+package com.gz.javastudy.netty.rpc.annotation;
 
 import org.springframework.stereotype.Component;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

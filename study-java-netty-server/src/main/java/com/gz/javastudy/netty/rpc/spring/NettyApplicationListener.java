@@ -1,6 +1,6 @@
-package com.gz.javastudy.netty.spring;
+package com.gz.javastudy.netty.rpc.spring;
 
-import com.gz.javastudy.netty.server.NettyServer;
+import com.gz.javastudy.netty.rpc.server.NettyServer;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;

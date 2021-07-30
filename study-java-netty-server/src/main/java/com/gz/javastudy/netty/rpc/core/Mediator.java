@@ -1,10 +1,11 @@
-package com.gz.javastudy.netty.core;
+package com.gz.javastudy.netty.rpc.core;
 
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.gz.javastudy.netty.asyn.RequestFuture;
-import com.gz.javastudy.netty.asyn.Response;
+import com.gz.javastudy.netty.rpc.asyn.RequestFuture;
+import com.gz.javastudy.netty.rpc.asyn.Response;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;

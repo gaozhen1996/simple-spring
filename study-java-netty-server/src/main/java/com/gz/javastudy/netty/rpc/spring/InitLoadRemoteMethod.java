@@ -1,11 +1,12 @@
-package com.gz.javastudy.netty.spring;
+package com.gz.javastudy.netty.rpc.spring;
 
-import com.gz.javastudy.netty.annotation.Remote;
-import com.gz.javastudy.netty.core.Mediator;
+import com.gz.javastudy.netty.rpc.annotation.Remote;
+import com.gz.javastudy.netty.rpc.core.Mediator;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
+
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.logging.Logger;
