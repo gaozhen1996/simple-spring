@@ -38,7 +38,7 @@ public class HttpServer {
 
     public static void main(String[] args) throws Exception {
         HttpServer server = new HttpServer();
-        int port = 18084;
+        int port = 8080;
         System.out.println("HTTP server listening on " + port);
         server.bind(port);
     }

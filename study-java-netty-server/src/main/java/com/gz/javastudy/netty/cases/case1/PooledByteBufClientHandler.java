@@ -20,9 +20,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-/**
- * Created by 李林峰 on 2018/8/5.
- */
+
 public class PooledByteBufClientHandler extends ChannelInboundHandlerAdapter {
 
     private final ByteBuf firstMessage;

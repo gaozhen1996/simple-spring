@@ -51,7 +51,7 @@ public class HttpClient {
 
     public static void main(String[] args) throws Exception {
     	HttpClient client = new HttpClient();
-        client.connect("127.0.0.1", 18084);
+        client.connect("127.0.0.1", 8080);
         ByteBuf body = Unpooled.wrappedBuffer("Http message!".getBytes("UTF-8"));
         DefaultFullHttpRequest request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET,
                 "http://127.0.0.1/user?id=10&addr=NanJing", body);

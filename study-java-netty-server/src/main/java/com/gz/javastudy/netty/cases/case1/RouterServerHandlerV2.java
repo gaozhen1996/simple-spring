@@ -25,17 +25,14 @@ import io.netty.util.ReferenceCountUtil;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * Created by 李林峰 on 2018/8/5.
- */
+
 public class RouterServerHandlerV2 extends SimpleChannelInboundHandler<ByteBuf> {
     static ExecutorService executorService = Executors.newSingleThreadExecutor();
     PooledByteBufAllocator allocator;
     @Override
     public void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) {
         byte [] body = new byte[msg.readableBytes()];
-        executorService.execute(()->
-        {
+        executorService.execute(()-> {
             if(allocator == null)
                 allocator = new PooledByteBufAllocator(false);
             //解析请求消息，做路由转发，代码省略...

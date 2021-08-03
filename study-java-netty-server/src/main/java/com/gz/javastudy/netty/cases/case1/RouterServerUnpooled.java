@@ -24,9 +24,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-/**
- * Created by 李林峰 on 2018/8/5.
- */
+
 public final class RouterServerUnpooled {
 
     static final int PORT = Integer.parseInt(System.getProperty("port", "18083"));
@@ -46,7 +44,7 @@ public final class RouterServerUnpooled {
                  public void initChannel(SocketChannel ch) throws Exception {
                      ChannelPipeline p = ch.pipeline();
                      ch.config().setAllocator(UnpooledByteBufAllocator.DEFAULT);
-                     p.addLast(new RouterServerHandler());
+                     p.addLast(new RouterServerHandlerV2());
                  }
              });
 

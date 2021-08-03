@@ -16,7 +16,7 @@ public class HttpResponse {
 	private byte [] body;
 	
 	public HttpResponse(FullHttpResponse response) {
-
+		System.out.println("HttpResponse:"+Thread.currentThread().getName());
 		this.header = response.headers();
 		this.response = response;
 		if (response.content() != null) {
@@ -48,6 +48,7 @@ public class HttpResponse {
 //	}
 
 	public byte [] body(){
+		System.out.println("body:"+Thread.currentThread().getName());
 		return body;
 	}
 }

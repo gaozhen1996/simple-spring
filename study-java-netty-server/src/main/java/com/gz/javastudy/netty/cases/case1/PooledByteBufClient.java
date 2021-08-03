@@ -23,9 +23,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-/**
- * Created by 李林峰 on 2018/8/5.
- */
+
 public final class PooledByteBufClient {
 
     static final String HOST = System.getProperty("host", "127.0.0.1");

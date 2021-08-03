@@ -46,7 +46,9 @@ public class RouterClientHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf reqMsg = (ByteBuf)msg;
         byte [] body = new byte[reqMsg.readableBytes()];
-        System.out.println(new String(body));
+        for (byte b :body) {
+            System.out.println(b);
+        }
         ctx.write(msg);
     }
 

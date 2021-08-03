@@ -16,6 +16,7 @@
 package com.gz.javastudy.netty.cases.case1;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.UnpooledByteBufAllocator;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -25,9 +26,7 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
-/**
- * Created by 李林峰 on 2018/8/5.
- */
+
 public final class RouterServer {
 
     static final int PORT = Integer.parseInt(System.getProperty("port", "18083"));
