@@ -10,9 +10,9 @@ public class Application {
             //只需要包含service，监听器的包名即可
             AnnotationConfigApplicationContext context =
                     new AnnotationConfigApplicationContext(
-                            "com.gz.javastudy.netty.server",
-                            "com.gz.javastudy.netty.spring",
-                            "com.gz.javastudy.netty.controller");
+                            "com.gz.javastudy.netty.rpc.server",
+                            "com.gz.javastudy.netty.rpc.spring",
+                            "com.gz.javastudy.netty.rpc.controller");
             //在jvm中增加一个关闭的钩子,当jvm关闭的时候，
             //会执行系统中已经设置的所有通过方法addShutdownHook
             //添加的钩子，当系统执行完这些钩子后，jvm才会关闭。

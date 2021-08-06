@@ -13,28 +13,26 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.gz.javastudy.netty.cases.case1;
+package com.gz.javastudy.netty.cases.case3;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.UnpooledByteBufAllocator;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.SelfSignedCertificate;
 
-public final class RouterServer {
 
-    static final int PORT = Integer.parseInt(System.getProperty("port", "18083"));
+public final class EchoServer {
+
+    static final int PORT = Integer.parseInt(System.getProperty("port", "18085"));
 
     public static void main(String[] args) throws Exception {
-        // Configure the server.
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -47,17 +45,12 @@ public final class RouterServer {
                  @Override
                  public void initChannel(SocketChannel ch) throws Exception {
                      ChannelPipeline p = ch.pipeline();
-                     p.addLast(new RouterServerHandler());
+                     p.addLast(new EchoServerHandler());
                  }
              });
-
-            // Start the server.
             ChannelFuture f = b.bind(PORT).sync();
-
-            // Wait until the server socket is closed.
             f.channel().closeFuture().sync();
         } finally {
-            // Shut down all event loops to terminate all threads.
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }

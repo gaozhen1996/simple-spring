@@ -100,7 +100,7 @@ public class NettyClient {
             future.channel().flush();
         }
 
-//        testRpc(client);
+        testRpc(client);
         System.exit(0);
     }
 

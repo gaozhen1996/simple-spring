@@ -14,6 +14,7 @@ public class NettyApplicationListener implements ApplicationListener<ContextRefr
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        System.out.println("---");
         new Thread(() -> NettyServer.start()).start();
         logger.info("netty 监听事件完成");
     }

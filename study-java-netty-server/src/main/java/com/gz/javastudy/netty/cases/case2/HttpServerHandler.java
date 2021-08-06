@@ -27,13 +27,13 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<FullHttpReque
 		 	sendError(ctx, BAD_REQUEST);
 		 	return;
 		 }
-		 logger.debug("Http Server receive the request : " + request);
+//		 logger.debug("Http Server receive the request : " + request);
 		 ByteBuf body = request.content().copy();
 		 FullHttpResponse response = new DefaultFullHttpResponse(
 	                HTTP_1_1, HttpResponseStatus.OK, body);
 		 response.headers().set(HttpHeaderNames.CONTENT_LENGTH, body.readableBytes());
 		 ctx.writeAndFlush(response).sync();
-		 logger.debug("Http Server send response succeed : " + response);
+//		 logger.debug("Http Server send response succeed : " + response);
 	}
 	
 	 @Override
