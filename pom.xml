@@ -15,7 +15,7 @@
 		<module>study-java-spring</module>
 		<module>study-java-redis</module>
 		<module>study-java-tomcat</module>
-		<module>study-java-netty-server</module>
+		<module>study-java-netty</module>
 	</modules>
 
 	<packaging>pom</packaging>
