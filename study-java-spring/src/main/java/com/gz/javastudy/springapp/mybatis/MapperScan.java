@@ -16,5 +16,4 @@ import java.lang.annotation.RetentionPolicy;
 @Import(MyImportBeanDefinitionRegistrar.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MapperScan {
-
 }

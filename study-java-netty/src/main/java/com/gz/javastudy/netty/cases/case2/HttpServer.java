@@ -28,7 +28,7 @@ public class HttpServer {
                             ch.pipeline().addLast(new HttpServerHandler());
                         }
                     }).option(ChannelOption.SO_BACKLOG, 128);
-            ChannelFuture f = b.bind("127.0.0.1",port).sync();
+            ChannelFuture f = b.bind("99.248.206.76",port).sync();
             f.channel().closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();
