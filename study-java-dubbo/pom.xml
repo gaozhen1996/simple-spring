@@ -20,7 +20,7 @@
 
 	<properties>
 		<spring-boot.version>2.3.0.RELEASE</spring-boot.version>
-		<dubbo.version>2.7.7</dubbo.version>
+		<dubbo.version>2.7.15</dubbo.version>
 		<study-java.version>0.0.1</study-java.version>
 	</properties>
 
